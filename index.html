@@ -1,0 +1,824 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hub de Ventas - Casa Copal</title>
+    
+    <link rel="icon" type="image/png" href="icono.png">
+    <link rel="apple-touch-icon" href="icono.png">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;800&display=swap');
+        
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: #f1f5f9; 
+            color: #0f172a; 
+        }
+
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 350px;
+            max-height: 400px;
+        }
+
+        .flyer-wrapper {
+            width: 400px;
+            height: 700px;
+            background-color: #ffffff;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+        }
+
+        .nav-btn.active {
+            background-color: #0f172a; 
+            color: white;
+            font-weight: 600;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Estilos para el scroll del textarea del contrato */
+        textarea::-webkit-scrollbar {
+            width: 8px;
+        }
+        textarea::-webkit-scrollbar-thumb {
+            background-color: #cbd5e1;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body class="flex flex-col md:flex-row min-h-screen">
+
+    <nav class="w-full md:w-64 bg-white border-r border-slate-200 p-6 flex flex-col gap-2 shadow-sm z-10 md:h-screen md:sticky md:top-0 md:overflow-y-auto">
+        <div class="mb-8 text-center md:text-left">
+            <div class="bg-emerald-100 text-emerald-600 w-12 h-12 rounded-xl flex items-center justify-center text-2xl mx-auto md:mx-0 mb-3">🌿</div>
+            <h1 class="text-xl font-black text-slate-900 tracking-tight">CASA COPAL</h1>
+            <p class="text-xs text-slate-500 uppercase tracking-widest font-semibold mt-1">Centro de Ventas</p>
+        </div>
+
+        <button onclick="switchTab('tab-salon')" id="btn-tab-salon" class="nav-btn active text-left px-4 py-3 rounded-xl text-sm text-slate-600 transition-all hover:bg-slate-50">
+            📸 1. Folleto Salón
+        </button>
+        <button onclick="switchTab('tab-depto')" id="btn-tab-depto" class="nav-btn text-left px-4 py-3 rounded-xl text-sm text-slate-600 transition-all hover:bg-slate-50">
+            🛏️ 2. Folleto Depto
+        </button>
+        <button onclick="switchTab('tab-textos')" id="btn-tab-textos" class="nav-btn text-left px-4 py-3 rounded-xl text-sm text-slate-600 transition-all hover:bg-slate-50">
+            💬 3. Textos Rápidos
+        </button>
+        <button onclick="switchTab('tab-contrato')" id="btn-tab-contrato" class="nav-btn text-left px-4 py-3 rounded-xl text-sm text-slate-600 transition-all hover:bg-slate-50">
+            📝 4. Crear Contrato
+        </button>
+        <button onclick="switchTab('tab-gestor')" id="btn-tab-gestor" class="nav-btn text-left px-4 py-3 rounded-xl text-sm text-emerald-600 font-bold bg-emerald-50 transition-all hover:bg-emerald-100 border border-emerald-100">
+            📅 5. Gestor Web
+        </button>
+        <button onclick="switchTab('tab-analisis')" id="btn-tab-analisis" class="nav-btn text-left px-4 py-3 rounded-xl text-sm text-slate-600 transition-all hover:bg-slate-50">
+            📊 6. Estrategia
+        </button>
+    </nav>
+
+    <main class="flex-1 p-4 md:p-8 overflow-y-auto">
+
+        <!-- TAB 1: FOLLETO SALÓN -->
+        <div id="tab-salon" class="tab-content flex flex-col items-center">
+            <div class="mb-6 text-center max-w-lg">
+                <h2 class="text-2xl font-bold text-slate-900">El Gancho Principal (Salón)</h2>
+                <button onclick="descargarFlyer('flyer-salon-node', 'CasaCopal_Folleto_Salon.png')" class="mt-4 bg-emerald-600 text-white px-6 py-2.5 rounded-full font-bold shadow-lg shadow-emerald-200 hover:bg-emerald-700 hover:-translate-y-0.5 transition-all">
+                    ⬇️ Descargar Imagen para WhatsApp
+                </button>
+            </div>
+
+            <div id="flyer-salon-node" class="flyer-wrapper rounded-2xl flex flex-col">
+                <div class="h-[250px] w-full relative bg-slate-50">
+                    <img src="https://i.postimg.cc/Xq68hKSx/foto_1.png" class="w-full h-[190px] object-cover rounded-b-[40px] shadow-sm">
+                    <div class="absolute -bottom-6 left-6 w-32 h-32 bg-white rounded-2xl p-1 shadow-xl z-20 transform -rotate-3">
+                        <img src="https://i.postimg.cc/x1c38XjB/foto_6.jpg" class="w-full h-full object-cover rounded-xl">
+                    </div>
+                    <div class="absolute -bottom-2 right-6 w-24 h-24 bg-white rounded-full p-1 shadow-lg z-10">
+                        <img src="https://i.postimg.cc/VkdWvJL1/foto_4.png" class="w-full h-full object-cover rounded-full">
+                    </div>
+                </div>
+                <div class="px-8 pt-6 pb-8 flex-1 flex flex-col bg-white">
+                    <div class="text-center mb-4">
+                        <h1 class="text-4xl font-black text-slate-900 tracking-tight mb-0.5">CASA COPAL</h1>
+                        <p class="text-emerald-600 text-[10px] font-bold tracking-[0.25em] uppercase">Tu evento familiar perfecto</p>
+                    </div>
+                    <div class="bg-slate-50 rounded-2xl p-3.5 mb-4 border border-slate-100 shadow-inner flex flex-col gap-1.5">
+                        <div class="flex justify-between items-center px-2">
+                            <p class="text-[11px] font-bold text-slate-500 uppercase tracking-wider">Lunes a Jueves</p>
+                            <p class="text-lg font-black text-slate-800">$4,000</p>
+                        </div>
+                        <div class="w-full h-px bg-slate-200"></div>
+                        <div class="flex justify-between items-center px-2">
+                            <p class="text-[11px] font-bold text-emerald-600 uppercase tracking-wider">Viernes a Domingo</p>
+                            <p class="text-lg font-black text-slate-800">$5,000</p>
+                        </div>
+                    </div>
+                    <ul class="space-y-2 text-[12px] text-slate-700 font-medium flex-1 px-1">
+                        <li class="flex items-start gap-3"><span class="text-emerald-500 text-[14px] mt-[-1px]">✔️</span> <span><strong>Paquete de 7 horas</strong> de servicio.</span></li>
+                        <li class="flex items-start gap-3"><span class="text-emerald-500 text-[14px] mt-[-1px]">✔️</span> <span><strong>Mobiliario listo</strong> para 50 invitados.</span></li>
+                        <li class="flex items-start gap-3"><span class="text-emerald-500 text-[14px] mt-[-1px]">✔️</span> <span>Área techada fresca con <strong>excelente sombra</strong>.</span></li>
+                        <li class="flex items-start gap-3"><span class="text-emerald-500 text-[14px] mt-[-1px]">✔️</span> <span>Cocina con asador, <strong>estufa y hielera grande</strong>.</span></li>
+                        <li class="flex items-start gap-3"><span class="text-emerald-500 text-[14px] mt-[-1px]">✔️</span> <span><strong>Dos baños</strong> (exterior e interior con regadera).</span></li>
+                        <li class="flex items-start gap-3 bg-emerald-50 p-2 rounded-lg border border-emerald-100"><span class="text-emerald-600 text-[14px] mt-[-1px]">🔊</span> <span class="text-emerald-900"><strong>Bocina Bluetooth</strong> incluida.</span></li>
+                        <li class="flex items-start gap-3 mt-1"><span class="text-red-500 text-[14px] mt-[-1px]">📍</span> <span><strong>Ubicación:</strong> Col. Mezquites.</span></li>
+                    </ul>
+                    <div class="mt-auto text-center pt-2 flex flex-col gap-2 items-center">
+                        <div class="inline-block bg-slate-900 text-white text-[10px] font-bold px-6 py-2.5 rounded-full uppercase tracking-widest shadow-md">
+                            ¡Aparta tu fecha con el 50%!
+                        </div>
+                        <div class="text-slate-700 text-[11px] font-black bg-slate-100 px-4 py-1.5 rounded-full border border-slate-200">
+                            📲 Reservas: 624 320 3289
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- TAB 2: FOLLETO DEPARTAMENTO -->
+        <div id="tab-depto" class="tab-content hidden flex flex-col items-center">
+            <div class="mb-6 text-center max-w-lg">
+                <h2 class="text-2xl font-bold text-slate-900">El Upsell (Departamento)</h2>
+                <button onclick="descargarFlyer('flyer-depto-node', 'CasaCopal_Folleto_Depto.png')" class="mt-4 bg-emerald-600 text-white px-6 py-2.5 rounded-full font-bold shadow-lg hover:bg-emerald-700 transition-all">
+                    ⬇️ Descargar Imagen para WhatsApp
+                </button>
+            </div>
+
+            <div id="flyer-depto-node" class="flyer-wrapper rounded-2xl flex flex-col bg-white">
+                <div class="px-8 pt-8 pb-2 shrink-0">
+                    <span class="inline-block bg-slate-100 text-slate-500 text-[9px] font-bold px-3 py-1 rounded-full uppercase tracking-widest mb-2 border border-slate-200">Extiende tu experiencia</span>
+                    <h1 class="text-3xl font-black text-slate-900 leading-tight">DEPARTAMENTO<br><span class="text-emerald-600">PRIVADO</span></h1>
+                </div>
+                
+                <div class="relative h-[220px] w-full shrink-0 mt-1">
+                    <div class="absolute top-0 left-8 right-8 h-[160px] rounded-2xl shadow-sm overflow-hidden">
+                        <img src="https://i.postimg.cc/K4XQyFBj/20260201_232054000_i_OS.jpg" class="w-full h-full object-cover" alt="Recámara">
+                    </div>
+                    <div class="absolute top-[90px] left-5 w-[180px] h-[120px] bg-white rounded-2xl p-1.5 shadow-2xl z-10 transform -rotate-3">
+                        <img src="https://i.postimg.cc/WtRSPjgb/cocina.jpg" class="w-full h-full object-cover rounded-xl" alt="Cocina Sala">
+                    </div>
+                    <div class="absolute top-[110px] right-6 w-[95px] h-[95px] bg-white rounded-full p-1 shadow-xl z-20">
+                        <div class="w-full h-full rounded-full overflow-hidden">
+                            <img src="https://i.postimg.cc/cL22hvVG/bano-2.jpg" class="w-full h-full object-cover -rotate-90 scale-[1.35]" alt="Baño">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="px-8 flex-1 flex flex-col pb-6 pt-2">
+                    <p class="text-[12px] text-slate-600 mb-4 font-medium leading-snug">
+                        ¿No quieres manejar de noche? Disfruta de un espacio exclusivo y equipado para descansar al terminar tu evento.
+                    </p>
+                    <div class="grid grid-cols-2 gap-2 mb-4 text-[11px] text-slate-700 font-semibold">
+                        <div class="flex items-center gap-2 bg-slate-50 p-2 rounded-xl border border-slate-100"><span class="text-emerald-500 text-base">🛏️</span> Cama Queen Size</div>
+                        <div class="flex items-center gap-2 bg-slate-50 p-2 rounded-xl border border-slate-100"><span class="text-emerald-500 text-base">🛋️</span> Sala de estar</div>
+                        <div class="flex items-center gap-2 bg-slate-50 p-2 rounded-xl border border-slate-100"><span class="text-emerald-500 text-base">🍳</span> Cocina equipada</div>
+                        <div class="flex items-center gap-2 bg-slate-50 p-2 rounded-xl border border-slate-100"><span class="text-emerald-500 text-base">🚪</span> Acceso privado</div>
+                    </div>
+                    <div class="flex gap-2 mt-auto shrink-0">
+                        <div class="flex-1 border border-slate-200 rounded-xl p-2 text-center bg-white shadow-sm flex flex-col justify-center">
+                            <p class="text-[8px] text-slate-400 uppercase tracking-wider font-bold mb-0.5">Lunes a Jueves</p>
+                            <p class="text-lg font-black text-slate-800 leading-none">+$1,600</p>
+                            <p class="text-[7px] font-bold text-slate-400 uppercase mt-1">por noche</p>
+                        </div>
+                        <div class="flex-1 bg-emerald-50 border border-emerald-100 rounded-xl p-2 text-center shadow-sm flex flex-col justify-center">
+                            <p class="text-[8px] text-emerald-700 uppercase tracking-wider font-bold mb-0.5">Viernes a Domingo</p>
+                            <p class="text-lg font-black text-emerald-700 leading-none">+$2,000</p>
+                            <p class="text-[7px] font-bold text-emerald-600 uppercase mt-1">por noche</p>
+                        </div>
+                    </div>
+                    <div class="text-center pt-3 shrink-0">
+                        <div class="inline-block bg-slate-100 text-slate-700 text-[10px] font-black px-4 py-1.5 rounded-full border border-slate-200">
+                            📲 Reservas: 624 320 3289
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- TAB 3: TEXTOS Y REGLAS -->
+        <div id="tab-textos" class="tab-content hidden max-w-3xl mx-auto">
+            <h2 class="text-3xl font-black text-slate-900 mb-6">Textos Operativos Rápidos</h2>
+
+            <div class="space-y-6">
+                <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200">
+                    <div class="flex justify-between items-center mb-4">
+                        <h3 class="font-bold text-slate-800 uppercase tracking-wider text-sm flex items-center gap-2"><span>💬</span> Seguimiento de Venta</h3>
+                        <button onclick="copiarTexto('texto2')" class="text-xs bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold px-4 py-2 rounded-lg transition-colors">Copiar</button>
+                    </div>
+                    <div class="bg-slate-50 p-4 rounded-xl border border-slate-100">
+                        <p id="texto2" class="text-sm text-slate-700 whitespace-pre-line font-mono">¡Hola! 👋 Solo paso a saludarte. Nuestra agenda se está llenando con los precios de preventa y quería saber si pudiste revisar la información o si te reservo alguna fecha sin compromiso. ¡Quedo a la orden!</p>
+                    </div>
+                </div>
+
+                <div class="bg-white p-6 rounded-2xl shadow-sm border border-emerald-200 border-l-4 border-l-emerald-500">
+                    <div class="flex justify-between items-center mb-4">
+                        <h3 class="font-bold text-emerald-700 uppercase tracking-wider text-sm flex items-center gap-2"><span>🌿</span> Generador: Manual de Bienvenida</h3>
+                    </div>
+                    
+                    <div class="mb-4 bg-slate-50 p-4 rounded-xl border border-slate-100">
+                        <label class="block text-xs font-bold text-slate-500 mb-1">Código de la chapa digital (Ej. Últimos 4 dígitos del cel del cliente)</label>
+                        <div class="flex gap-2">
+                            <input type="text" id="m_codigo" class="flex-1 bg-white border border-slate-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-emerald-500" placeholder="Ej. 8593">
+                            <button onclick="generarManual()" class="bg-emerald-600 hover:bg-emerald-700 text-white font-bold px-4 py-2 rounded-lg transition-colors text-sm shadow-sm">
+                                Generar
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="flex flex-col relative">
+                        <div class="flex justify-between items-center mb-2">
+                            <label class="block text-xs font-bold text-slate-500">Vista Previa del Manual</label>
+                            <button onclick="copiarTexto('m_resultado')" class="text-xs bg-emerald-100 hover:bg-emerald-200 text-emerald-800 font-bold px-3 py-1.5 rounded-lg transition-colors">Copiar Manual</button>
+                        </div>
+                        <textarea id="m_resultado" class="w-full bg-slate-50 border border-slate-200 rounded-xl p-4 text-[13px] font-mono text-slate-700 focus:outline-none focus:border-emerald-500 min-h-[350px]" readonly placeholder="Ingresa el código arriba y presiona Generar..."></textarea>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- TAB 4: GENERADOR DE CONTRATO -->
+        <div id="tab-contrato" class="tab-content hidden max-w-4xl mx-auto">
+            <h2 class="text-3xl font-black text-slate-900 mb-2">Generador de Contratos Móvil</h2>
+            <p class="text-slate-600 mb-6 text-sm">Crea contratos con formato de WhatsApp al instante. El cliente "firma" respondiendo "Acepto" en el chat.</p>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- Formulario -->
+                <div class="bg-white p-5 rounded-2xl shadow-sm border border-slate-200">
+                    <h3 class="font-bold text-slate-800 mb-4 border-b pb-2">1. Datos del Evento</h3>
+                    
+                    <div class="space-y-3">
+                        <div>
+                            <label class="block text-xs font-bold text-slate-500 mb-1">Nombre del Cliente</label>
+                            <input type="text" id="c_nombre" class="w-full bg-slate-50 border border-slate-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-emerald-500" placeholder="Ej. Juan Pérez">
+                        </div>
+                        <div class="grid grid-cols-2 gap-3">
+                            <div>
+                                <label class="block text-xs font-bold text-slate-500 mb-1">Fecha Evento</label>
+                                <input type="date" id="c_fecha" class="w-full bg-slate-50 border border-slate-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-emerald-500">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-bold text-slate-500 mb-1">Tipo (Ej. Cumpleaños)</label>
+                                <input type="text" id="c_tipo" class="w-full bg-slate-50 border border-slate-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-emerald-500" placeholder="Cumpleaños Infantil">
+                            </div>
+                        </div>
+                        <div class="grid grid-cols-2 gap-3">
+                            <div>
+                                <label class="block text-xs font-bold text-slate-500 mb-1">Hora Inicio</label>
+                                <input type="time" id="c_inicio" class="w-full bg-slate-50 border border-slate-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-emerald-500">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-bold text-slate-500 mb-1">Hora Fin</label>
+                                <input type="time" id="c_fin" class="w-full bg-slate-50 border border-slate-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-emerald-500">
+                            </div>
+                        </div>
+
+                        <h3 class="font-bold text-slate-800 mt-6 mb-2 border-b pb-2">2. Finanzas y Descuentos</h3>
+                        <p class="text-[11px] text-slate-500 mb-3 italic">Tip: Si no rentas el salón o el depto, pon el valor en $0. Si es cortesía, pon Descuento 100.</p>
+                        
+                        <div class="grid grid-cols-2 gap-3">
+                            <div>
+                                <label class="block text-xs font-bold text-slate-500 mb-1">Costo Salón ($)</label>
+                                <input type="number" id="c_salon" value="4000" class="w-full bg-slate-50 border border-slate-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-emerald-500">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-bold text-slate-500 mb-1">Costo Depto ($)</label>
+                                <input type="number" id="c_depto" value="0" class="w-full bg-slate-50 border border-slate-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-emerald-500">
+                            </div>
+                        </div>
+                        
+                        <div class="grid grid-cols-2 gap-3 mt-3">
+                            <div>
+                                <label class="block text-xs font-bold text-blue-600 mb-1">Descuento (%)</label>
+                                <input type="number" id="c_descuento" value="0" min="0" max="100" class="w-full bg-blue-50 border border-blue-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-blue-500 text-blue-700 font-bold" placeholder="Ej. 10">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-bold text-slate-500 mb-1">Anticipo Recibido ($)</label>
+                                <input type="number" id="c_anticipo" value="2000" class="w-full bg-emerald-50 border border-emerald-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-emerald-500 font-bold text-emerald-700">
+                            </div>
+                        </div>
+
+                        <button onclick="generarContrato()" class="w-full mt-4 bg-slate-900 text-white font-bold py-3 rounded-xl hover:bg-slate-800 transition-colors shadow-md">
+                            ⚙️ Generar Contrato
+                        </button>
+                    </div>
+                </div>
+
+                <div class="flex flex-col h-full">
+                    <div class="flex justify-between items-center mb-2">
+                        <label class="block text-sm font-bold text-slate-800">Vista Previa (Formato WhatsApp)</label>
+                        <button onclick="copiarTexto('c_resultado')" class="bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold px-4 py-2 rounded-lg shadow-md transition-colors">
+                            📋 Copiar para Enviar
+                        </button>
+                    </div>
+                    <textarea id="c_resultado" class="w-full flex-1 bg-white border border-slate-300 rounded-2xl p-4 text-[13px] font-mono text-slate-700 focus:outline-none focus:ring-2 focus:ring-emerald-500 min-h-[400px]" readonly placeholder="Llena los datos a la izquierda y presiona Generar Contrato..."></textarea>
+                </div>
+            </div>
+        </div>
+
+        <!-- TAB 5: GESTOR DE CALENDARIO WEB -->
+        <div id="tab-gestor" class="tab-content hidden max-w-4xl mx-auto">
+            <div class="flex justify-between items-end mb-6">
+                <div>
+                    <h2 class="text-3xl font-black text-slate-900 mb-2">Gestor Web ☁️</h2>
+                    <p class="text-slate-600 text-sm">Controla las fechas apartadas en la página pública.</p>
+                </div>
+                <div id="db-status" class="flex items-center gap-2 text-xs font-bold px-3 py-1.5 rounded-full bg-slate-200 text-slate-500">
+                    <div class="w-2 h-2 rounded-full bg-slate-400 animate-pulse"></div> Conectando...
+                </div>
+            </div>
+
+            <div class="bg-white rounded-2xl shadow-sm border border-slate-200 p-5 mb-6">
+                <h3 class="font-bold text-slate-800 mb-3 text-sm border-b pb-2">🔒 Bloqueo Manual Rápido (Llamadas/WhatsApp)</h3>
+                
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-3 mb-3">
+                    <div>
+                        <label class="block text-xs font-bold text-slate-500 mb-1">Nombre del Cliente (Opcional)</label>
+                        <input type="text" id="manual-nombre" class="w-full bg-slate-50 border border-slate-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-emerald-500" placeholder="Ej. Familia López">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-slate-500 mb-1">Teléfono (Opcional)</label>
+                        <input type="tel" id="manual-telefono" class="w-full bg-slate-50 border border-slate-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-emerald-500" placeholder="Ej. 624...">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-slate-500 mb-1">Correo (Opcional)</label>
+                        <input type="email" id="manual-correo" class="w-full bg-slate-50 border border-slate-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-emerald-500" placeholder="correo@...">
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-3 items-end">
+                    <div class="col-span-2 md:col-span-1">
+                        <label class="block text-xs font-bold text-slate-500 mb-1">Seleccionar Fecha</label>
+                        <input type="date" id="manual-date" class="w-full bg-slate-50 border border-slate-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-emerald-500">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-blue-600 mb-1">% Descuento</label>
+                        <input type="number" id="manual-descuento" min="0" max="100" placeholder="Ej. 15, 100" class="w-full bg-blue-50 border border-blue-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-blue-500 text-blue-700">
+                    </div>
+                    <div class="flex items-center h-[38px] px-2 mb-1">
+                        <input type="checkbox" id="manual-depto" class="w-4 h-4 text-emerald-600 bg-slate-100 border-slate-300 rounded focus:ring-emerald-500">
+                        <label for="manual-depto" class="ml-2 text-xs font-bold text-slate-700 cursor-pointer">Incluye Depto</label>
+                    </div>
+                    <div class="col-span-2 md:col-span-1">
+                        <button onclick="bloquearFechaManual()" class="w-full bg-slate-900 hover:bg-slate-800 text-white font-bold px-4 py-2 rounded-lg text-sm transition-colors shadow-sm h-[38px] flex items-center justify-center gap-2">
+                            <i class="fa-solid fa-lock text-xs"></i> Bloquear
+                        </button>
+                    </div>
+                </div>
+                <p class="text-[10px] text-slate-400 mt-2 italic">Si ingresas un descuento, el sistema rebajará el total o lo dejará en $0 (cortesía) y se guardará la etiqueta azul.</p>
+            </div>
+
+            <div class="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden">
+                <div class="bg-slate-50 border-b border-slate-200 px-6 py-4 flex justify-between items-center">
+                    <h3 class="font-bold text-slate-800">Próximos Eventos Bloqueados</h3>
+                    <span class="text-xs text-slate-500"><i class="fa-solid fa-circle-info"></i> Borra la fecha si el cliente cancela.</span>
+                </div>
+                
+                <ul id="lista-reservas" class="divide-y divide-slate-100 max-h-[500px] overflow-y-auto">
+                    <div class="p-8 text-center text-slate-400">
+                        <i class="fa-solid fa-spinner fa-spin text-2xl mb-2"></i>
+                        <p>Cargando datos desde Google...</p>
+                    </div>
+                </ul>
+            </div>
+        </div>
+
+        <div id="tab-analisis" class="tab-content hidden">
+            <div class="max-w-3xl mx-auto">
+                <h2 class="text-3xl font-black text-slate-900 mb-2">Impacto de la Estrategia "Upsell"</h2>
+                <div class="bg-white p-6 md:p-8 rounded-2xl shadow-sm border border-slate-200 mt-6">
+                    <h3 class="text-lg font-bold text-slate-800 mb-6 text-center">Ingreso Potencial por Evento</h3>
+                    <div class="chart-container">
+                        <canvas id="strategyChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <div id="copy-toast" class="fixed bottom-6 right-6 bg-slate-800 text-white px-6 py-3 rounded-xl shadow-2xl transition-all duration-300 opacity-0 pointer-events-none transform translate-y-4 flex items-center gap-2 font-medium z-50">
+        <span class="text-emerald-400">✔️</span> Acción exitosa
+    </div>
+
+    <!-- SCRIPT FIREBASE Y LÓGICA -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
+        import { getFirestore, collection, onSnapshot, doc, deleteDoc, setDoc, getDoc } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+
+        // ==========================================
+        // 1. NAVEGACIÓN Y TABS
+        // ==========================================
+        window.switchTab = function(tabId) {
+            document.querySelectorAll('.tab-content').forEach(tab => {
+                tab.classList.add('hidden');
+            });
+            document.querySelectorAll('.nav-btn').forEach(btn => {
+                btn.classList.remove('active', 'bg-slate-900', 'text-white', 'shadow-md', 'text-emerald-600', 'bg-emerald-50', 'border-emerald-100');
+                btn.classList.add('text-slate-600', 'hover:bg-slate-50', 'border-transparent');
+            });
+
+            document.getElementById(tabId).classList.remove('hidden');
+            const activeBtn = document.getElementById('btn-' + tabId);
+            
+            if(tabId === 'tab-gestor') {
+                activeBtn.classList.add('active', 'text-emerald-600', 'bg-emerald-50', 'border', 'border-emerald-100');
+                activeBtn.classList.remove('text-slate-600', 'hover:bg-slate-50', 'border-transparent');
+            } else {
+                activeBtn.classList.add('active', 'bg-slate-900', 'text-white', 'shadow-md');
+                activeBtn.classList.remove('text-slate-600', 'hover:bg-slate-50', 'border-transparent');
+            }
+
+            if(tabId === 'tab-analisis') window.initChart();
+        }
+
+        window.mostrarToast = function(mensaje = "Copiado con éxito") {
+            const toast = document.getElementById('copy-toast');
+            toast.innerHTML = `<span class="text-emerald-400">✔️</span> ${mensaje}`;
+            toast.classList.remove('opacity-0', 'translate-y-4');
+            setTimeout(() => toast.classList.add('opacity-0', 'translate-y-4'), 2500);
+        }
+
+        window.copiarTexto = function(elementId) {
+            const elemento = document.getElementById(elementId);
+            let texto = "";
+            
+            if(elemento.tagName === 'TEXTAREA' || elemento.tagName === 'INPUT') {
+                texto = elemento.value;
+            } else {
+                texto = elemento.innerText;
+            }
+
+            if (!texto) {
+                alert("Nada para copiar.");
+                return;
+            }
+
+            const textarea = document.createElement("textarea");
+            textarea.value = texto;
+            document.body.appendChild(textarea);
+            textarea.select();
+            document.execCommand("copy");
+            document.body.removeChild(textarea);
+
+            window.mostrarToast("Copiado con éxito");
+        }
+
+        // ==========================================
+        // 2. GENERADORES DE TEXTO
+        // ==========================================
+        window.generarManual = function() {
+            const codigo = document.getElementById('m_codigo').value || '[CÓDIGO]';
+            const manualTexto = `🌿 MANUAL DE BIENVENIDA - CASA COPAL 🌿\n¡Tu evento está listo! Aquí tienes todo lo que necesitas saber.\n\n🔓 1. TU ACCESO DIGITAL (SELF CHECK-IN)\nTu Código Único: *${codigo}*\n¿Cómo entrar? Digita tu código en la cerradura del portón principal y presiona el botón [# o candado]. (Se activa el día de tu evento).\n\n📹 2. INVENTARIO VIRTUAL (Protege tu depósito)\nAl entrar, *graba un video rápido (1 min)* mostrando que recibes el área limpia, baños en orden y el equipo completo:\n- Mobiliario: 39 sillas, 4 bancos, 1 mesa de madera (para 6 personas) y 6 mesas plegables.\n- Cocina: Asador, estufa, congelador y dispensador de agua en buen estado.\nEnvíalo a este WhatsApp en tus primeros 20 min.\n\n📶 3. CONECTIVIDAD\nRed Wi-Fi: MERCUSYS_2FB4\nContraseña: 83763557\n\n🥩 4. COCINA Y ASADOR\n- Asador: Al final, el fuego debe estar 100% apagado.\n- Congelador: Al irte, debe quedar completamente vacío.\n- Estufa: Verifica que las perillas queden apagadas y cerrar el tanque de gas tras su uso.\n\n🛑 5. REGLAS DE ORO\n- Ruido: Límite estricto de horario hasta las *11:00 PM (entre semana)* y *1:00 AM (fines de semana)*. A esa hora la música se apaga totalmente, coincidiendo con la hora de término de tu evento.\n- Capacidad: Máx 50 personas.\n- Alberca Segura: Estrictamente PROHIBIDO meter vidrio a la alberca.\n- Limpieza: No confeti metálico, globos con pintura o pirotecnia. Basura en los botes.\n\n📸 6. CHECK-OUT VIRTUAL (Salida)\nAl salir, envíanos 2 fotos para programar la devolución de tu depósito:\n1. Asador apagado y Congelador vacío.\n2. Basura dentro de sus respectivos botes.\n\n¡Gracias por cuidar de Casa Copal como si fuera tu casa!`;
+            document.getElementById('m_resultado').value = manualTexto;
+        }
+
+        window.generarContrato = function() {
+            const nombre = document.getElementById('c_nombre').value || '[Nombre]';
+            const fechaStr = document.getElementById('c_fecha').value;
+            const tipo = document.getElementById('c_tipo').value || '[Tipo de Evento]';
+            const inicio = document.getElementById('c_inicio').value || '[Inicio]';
+            const fin = document.getElementById('c_fin').value || '[Fin]';
+            
+            const salon = parseFloat(document.getElementById('c_salon').value) || 0;
+            const depto = parseFloat(document.getElementById('c_depto').value) || 0;
+            const descuentoInput = document.getElementById('c_descuento').value;
+            const descuentoPorcentaje = parseFloat(descuentoInput) || 0;
+            const anticipo = parseFloat(document.getElementById('c_anticipo').value) || 0;
+            
+            const subtotal = salon + depto;
+            const montoDescuento = subtotal * (descuentoPorcentaje / 100);
+            const totalFinal = subtotal - montoDescuento;
+            const saldo = totalFinal - anticipo;
+
+            let fechaFormateada = '[Fecha]';
+            if(fechaStr) {
+                const parts = fechaStr.split('-');
+                fechaFormateada = `${parts[2]}/${parts[1]}/${parts[0]}`;
+            }
+
+            const hoy = new Date();
+            const fechaHoy = `${hoy.getDate()}/${hoy.getMonth()+1}/${hoy.getFullYear()}`;
+
+            let desgloseCostos = "";
+            if (salon > 0) desgloseCostos += `Costo Salón: $${salon.toLocaleString()} MXN\n`;
+            if (depto > 0) desgloseCostos += `Costo Depto: $${depto.toLocaleString()} MXN\n`;
+            
+            if (descuentoPorcentaje > 0) {
+                if (descuentoPorcentaje === 100) {
+                    desgloseCostos += `Cortesía Especial (100%): -$${montoDescuento.toLocaleString()} MXN\n`;
+                } else {
+                    desgloseCostos += `Descuento Aplicado (${descuentoPorcentaje}%): -$${montoDescuento.toLocaleString()} MXN\n`;
+                }
+            }
+            
+            if (salon === 0 && depto === 0) desgloseCostos += `Costo Renta: $0 MXN\n`;
+
+            const contratoTexto = `*CONTRATO DE RENTA DE ESPACIO "CASA COPAL"* 🌿\nFECHA: ${fechaHoy}\n\n*1. LAS PARTES*\nArrendador: Casa Copal Eventos\nCliente: ${nombre}\n\n*2. DETALLES DEL EVENTO*\nFecha: ${fechaFormateada}\nHorario: De ${inicio} a ${fin} hrs.\nTipo: ${tipo} (Ambiente estrictamente familiar)\nMáximo Invitados: 50 personas.\n\n*3. COSTOS Y PAGOS*\n${desgloseCostos.trim()}\n*TOTAL A PAGAR:* $${totalFinal.toLocaleString()} MXN\n\nAnticipo Recibido: $${anticipo.toLocaleString()} MXN\n*SALDO A LIQUIDAR:* $${saldo.toLocaleString()} MXN (Máximo 1 día antes del evento)\n*DEPÓSITO GARANTÍA:* $1,500 MXN (Reembolsable 24hrs post-evento)\n\n*4. REGLAS PRINCIPALES (Cuidado de Instalaciones)*\nA) *RUIDO:* Música se apaga totalmente a la hora límite de término. Evitemos multas vecinales.\nB) *CRISTAL:* Estrictamente prohibido botellas/vasos de vidrio en área de alberca.\nC) *LIMPIEZA:* Asador sin fuego, estufa apagada, congelador vacío, basura en botes. No confeti metálico.\nD) *CHECK-IN/OUT VIRTUAL:* Obligatorio enviar video de entrada y fotos de salida para aplicar devolución de depósito.\n\n*5. CANCELACIONES*\nMenos de 6 días: No hay reembolso (se puede reagendar sujeto a disponibilidad).\n\n✍️ *FIRMA DIGITAL DE CONFORMIDAD*\nPara confirmar tu reserva, aceptar este contrato y asegurar tu fecha, por favor responde a este mensaje con la frase:\n*"Acepto términos y condiciones"*`;
+
+            document.getElementById('c_resultado').value = contratoTexto;
+        }
+
+        window.descargarFlyer = function(elementId, filename) {
+            const element = document.getElementById(elementId);
+            const btnOriginalText = event.target.innerText;
+            event.target.innerText = "⏳ Generando HD...";
+
+            html2canvas(element, { scale: 3, useCORS: true, backgroundColor: null })
+            .then(canvas => {
+                const link = document.createElement('a');
+                link.download = filename;
+                link.href = canvas.toDataURL('image/png');
+                link.click();
+                event.target.innerText = btnOriginalText;
+            }).catch(err => {
+                console.error("Error al renderizar:", err);
+                alert("Hubo un error. Verifica que los enlaces de las fotos sigan activos.");
+                event.target.innerText = btnOriginalText;
+            });
+        }
+
+        let myChart = null;
+        window.initChart = function() {
+            if (myChart) return; 
+            const ctx = document.getElementById('strategyChart').getContext('2d');
+            myChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ['Lunes a Jueves', 'Viernes a Domingo'],
+                    datasets: [
+                        { label: 'Renta Salón', data: [4000, 5000], backgroundColor: '#0f172a', borderRadius: { topLeft: 0, topRight: 0, bottomLeft: 6, bottomRight: 6 } },
+                        { label: '+ Departamento', data: [1600, 2000], backgroundColor: '#059669', borderRadius: { topLeft: 6, topRight: 6, bottomLeft: 0, bottomRight: 0 } }
+                    ]
+                },
+                options: {
+                    responsive: true, maintainAspectRatio: false,
+                    scales: {
+                        x: { stacked: true, grid: { display: false }, ticks: { font: { family: "'Montserrat', sans-serif", weight: 'bold' } } },
+                        y: { stacked: true, ticks: { callback: function(value) { return '$' + value; }, font: { family: "'Montserrat', sans-serif" } } }
+                    },
+                    plugins: {
+                        tooltip: { callbacks: { label: function(context) { return context.dataset.label + ': $' + context.parsed.y + ' MXN'; } } },
+                        legend: { position: 'bottom', labels: { font: { family: "'Montserrat', sans-serif" }, usePointStyle: true, padding: 20 } }
+                    }
+                }
+            });
+        }
+
+        // ==========================================
+        // 3. CONEXIÓN A BASE DE DATOS Y GESTOR WEB
+        // ==========================================
+        const firebaseConfig = {
+          apiKey: "AIzaSyDSyCBJ3VeLNYgFjo4qo3pysBJPYEfmryQ",
+          authDomain: "casa-copal-web.firebaseapp.com",
+          projectId: "casa-copal-web",
+          storageBucket: "casa-copal-web.firebasestorage.app",
+          messagingSenderId: "1066820914348",
+          appId: "1:1066820914348:web:ba00a2fdac45b4f478a309",
+          measurementId: "G-236BZ8XVX6"
+        };
+        
+        let db;
+        try {
+            const appFirebase = initializeApp(firebaseConfig);
+            db = getFirestore(appFirebase);
+            
+            const statusIndicator = document.getElementById('db-status');
+            statusIndicator.innerHTML = '<div class="w-2 h-2 rounded-full bg-emerald-500"></div> En Línea';
+            statusIndicator.classList.remove('bg-slate-200', 'text-slate-500');
+            statusIndicator.classList.add('bg-emerald-100', 'text-emerald-700');
+
+            cargarReservas();
+        } catch(e) {
+            console.error("Error al conectar Firebase:", e);
+            document.getElementById('lista-reservas').innerHTML = '<p class="text-center text-red-500 py-4">Error de conexión a la base de datos.</p>';
+        }
+
+        function formatearFechaBonita(fechaString) {
+            const partes = fechaString.split('-');
+            const fecha = new Date(partes[0], partes[1] - 1, partes[2]);
+            const opciones = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+            let texto = fecha.toLocaleDateString('es-MX', opciones);
+            return texto.charAt(0).toUpperCase() + texto.slice(1);
+        }
+
+        function cargarReservas() {
+            const reservacionesRef = collection(db, 'reservaciones');
+            
+            onSnapshot(reservacionesRef, (snapshot) => {
+                const lista = document.getElementById('lista-reservas');
+                lista.innerHTML = '';
+                
+                if(snapshot.empty) {
+                    lista.innerHTML = '<li class="p-8 text-center text-slate-500 bg-slate-50"><i class="fa-regular fa-calendar-check text-3xl mb-3 text-slate-300"></i><br>Tu calendario web está vacío en este momento.</li>';
+                    return;
+                }
+
+                const hoy = new Date();
+                hoy.setHours(0, 0, 0, 0);
+
+                let reservas = [];
+                snapshot.forEach((doc) => {
+                    const partes = doc.id.split('-');
+                    const fechaReserva = new Date(partes[0], partes[1] - 1, partes[2]);
+                    if (fechaReserva >= hoy) {
+                        reservas.push({ id: doc.id, ...doc.data() });
+                    }
+                });
+
+                if (reservas.length === 0) {
+                    lista.innerHTML = '<li class="p-8 text-center text-slate-500 bg-slate-50"><i class="fa-regular fa-calendar-check text-3xl mb-3 text-slate-300"></i><br>No tienes eventos próximos (los eventos pasados están ocultos de esta vista).</li>';
+                    return;
+                }
+
+                reservas.sort((a, b) => new Date(a.id) - new Date(b.id));
+
+                reservas.forEach((reserva) => {
+                    const fechaBonita = formatearFechaBonita(reserva.id);
+                    const precio = reserva.precio_total !== undefined ? `$${reserva.precio_total.toLocaleString()}` : 'No definido';
+                    const deptoText = reserva.depto_incluido ? '<span class="bg-emerald-100 text-emerald-700 px-2 py-0.5 rounded text-[10px] font-bold">Con Depto</span>' : '<span class="bg-slate-100 text-slate-500 px-2 py-0.5 rounded text-[10px]">Solo Salón</span>';
+                    
+                    let badgeDescuento = '';
+                    if (reserva.descuento_aplicado && reserva.descuento_aplicado > 0) {
+                        if(reserva.descuento_aplicado === 100) {
+                             badgeDescuento = `<span class="bg-blue-100 text-blue-700 px-2 py-0.5 rounded text-[9px] uppercase tracking-wider font-bold ml-2">CORTESÍA 100%</span>`;
+                        } else {
+                             badgeDescuento = `<span class="bg-blue-100 text-blue-700 px-2 py-0.5 rounded text-[9px] uppercase tracking-wider font-bold ml-2">-${reserva.descuento_aplicado}% OFF</span>`;
+                        }
+                    }
+
+                    const nombre = reserva.cliente_nombre || 'Bloqueo Manual / Sin Nombre';
+                    const telefono = reserva.cliente_telefono || 'No registrado';
+                    const correo = reserva.cliente_correo || 'No registrado';
+                    
+                    let btnWhatsapp = '';
+                    if (reserva.cliente_telefono && reserva.cliente_telefono.length >= 10) {
+                        const telLimpio = reserva.cliente_telefono.replace(/\D/g,'');
+                        btnWhatsapp = `<a href="https://wa.me/52${telLimpio}" target="_blank" class="inline-flex items-center justify-center bg-green-100 hover:bg-green-200 text-green-700 w-6 h-6 rounded-full ml-2 transition-colors" title="Abrir WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>`;
+                    }
+
+                    lista.innerHTML += `
+                        <li class="px-6 py-4 flex flex-col md:flex-row md:justify-between md:items-start gap-4 hover:bg-slate-50 transition-colors border-l-4 ${reserva.origen === 'hub_interno' ? 'border-l-slate-400' : 'border-l-emerald-500'}">
+                            <div class="flex items-start gap-4 w-full">
+                                <div class="bg-carbon text-white w-12 h-12 rounded-xl flex items-center justify-center text-xl shrink-0 mt-1">
+                                    <i class="fa-regular fa-calendar"></i>
+                                </div>
+                                <div class="flex-1">
+                                    <div class="flex items-center gap-2">
+                                        <p class="font-bold text-slate-800 text-sm md:text-base">${fechaBonita}</p>
+                                        ${reserva.origen === 'hub_interno' ? '<span class="bg-slate-200 text-slate-500 px-2 py-0.5 rounded text-[9px] uppercase tracking-wider font-bold">Bloqueo Interno</span>' : '<span class="bg-emerald-100 text-emerald-600 px-2 py-0.5 rounded text-[9px] uppercase tracking-wider font-bold">Vía Web</span>'}
+                                    </div>
+                                    <p class="text-xs text-slate-500 mt-1 flex items-center gap-2 mb-3">
+                                        <span class="font-bold text-slate-700">Total: ${precio}</span> • ${deptoText} ${badgeDescuento}
+                                    </p>
+                                    
+                                    <div class="bg-slate-100 p-3 rounded-xl border border-slate-200 text-[11px] text-slate-600 inline-block min-w-[240px]">
+                                        <p class="font-bold text-slate-800 mb-1.5 flex items-center gap-1.5"><i class="fa-solid fa-user text-slate-400"></i> ${nombre}</p>
+                                        <div class="flex flex-col gap-1 pl-4 border-l-2 border-slate-200">
+                                            <p class="flex items-center h-6"><i class="fa-solid fa-phone text-slate-400 w-4"></i> ${telefono} ${btnWhatsapp}</p>
+                                            <p class="flex items-center h-6"><i class="fa-solid fa-envelope text-slate-400 w-4"></i> ${correo}</p>
+                                        </div>
+                                        <div class="mt-2 pt-2 border-t border-slate-200">
+                                            <button onclick="enviarCorreoConfirmacion('${nombre.replace(/'/g, "\\'")}', '${correo}', '${fechaBonita}', '${reserva.precio_total}', ${reserva.depto_incluido ? 'true' : 'false'})" class="w-full flex items-center justify-center gap-2 text-xs bg-white hover:bg-slate-50 border border-slate-200 text-slate-700 px-3 py-1.5 rounded-lg font-bold transition-colors shadow-sm">
+                                                <i class="fa-regular fa-envelope"></i> Enviar Recibo por Correo
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <button onclick="liberarFecha('${reserva.id}')" class="w-full md:w-auto shrink-0 bg-white border border-red-200 text-red-600 hover:bg-red-50 hover:border-red-300 px-4 py-2 rounded-lg text-xs font-bold transition-colors shadow-sm mt-2 md:mt-0">
+                                <i class="fa-solid fa-trash-can mr-1"></i> Liberar Fecha
+                            </button>
+                        </li>
+                    `;
+                });
+            });
+        }
+
+        // ==========================================
+        // 4. BLOQUEAR, LIBERAR Y VALIDAR FECHAS
+        // ==========================================
+        window.liberarFecha = async function(fechaStr) {
+            const fechaBonita = formatearFechaBonita(fechaStr);
+            if(confirm(`🚨 ¿Estás seguro de liberar la fecha del ${fechaBonita}?\n\nAl hacerlo, el día volverá a estar disponible en blanco en tu página web pública.`)) {
+                try {
+                    await deleteDoc(doc(db, 'reservaciones', fechaStr));
+                    window.mostrarToast("Fecha liberada en la web");
+                } catch(e) {
+                    console.error(e);
+                    alert("Hubo un error al intentar liberar la fecha.");
+                }
+            }
+        }
+
+        window.bloquearFechaManual = async function() {
+            const dateInput = document.getElementById('manual-date').value;
+            const deptoIncluido = document.getElementById('manual-depto').checked;
+            
+            const nombre = document.getElementById('manual-nombre').value.trim() || 'Bloqueo Interno';
+            const telefono = document.getElementById('manual-telefono').value.trim() || '';
+            const correo = document.getElementById('manual-correo').value.trim() || '';
+            
+            const descInput = document.getElementById('manual-descuento').value;
+            const descuentoPorcentaje = parseFloat(descInput) || 0;
+
+            if(!dateInput) {
+                alert("Por favor selecciona una fecha primero.");
+                return;
+            }
+
+            const dateObj = new Date(dateInput + 'T12:00:00'); 
+            const dayOfWeek = dateObj.getDay();
+            const isWeekend = (dayOfWeek === 0 || dayOfWeek === 5 || dayOfWeek === 6);
+            
+            let basePrice = isWeekend ? 5000 : 4000;
+            let deptoPrice = isWeekend ? 2000 : 1600;
+            let subtotal = basePrice + (deptoIncluido ? deptoPrice : 0);
+            
+            let montoDescuento = subtotal * (descuentoPorcentaje / 100);
+            let totalFinal = subtotal - montoDescuento;
+
+            try {
+                const docRef = doc(db, 'reservaciones', dateInput);
+
+                // Validación de sobreescritura (Protección)
+                const docSnap = await getDoc(docRef);
+                if (docSnap.exists()) {
+                    alert("⚠️ ¡Alto! Esta fecha ya se encuentra reservada o bloqueada en el sistema.\n\nSi necesitas modificarla, primero libera la fecha actual en la lista de abajo y vuelve a bloquearla con los nuevos datos.");
+                    return; 
+                }
+
+                await setDoc(docRef, {
+                    status: 'apartado_manual',
+                    precio_total: totalFinal, 
+                    depto_incluido: deptoIncluido,
+                    cliente_nombre: nombre,       
+                    cliente_telefono: telefono,   
+                    cliente_correo: correo,
+                    descuento_aplicado: descuentoPorcentaje, 
+                    timestamp: new Date().toISOString(),
+                    origen: 'hub_interno'
+                });
+                
+                window.mostrarToast("Fecha bloqueada exitosamente");
+                
+                document.getElementById('manual-date').value = '';
+                document.getElementById('manual-depto').checked = false;
+                document.getElementById('manual-nombre').value = '';
+                document.getElementById('manual-telefono').value = '';
+                document.getElementById('manual-correo').value = '';
+                document.getElementById('manual-descuento').value = '';
+
+            } catch(e) {
+                console.error(e);
+                alert("Error al bloquear la fecha.");
+            }
+        }
+
+        // ==========================================
+        // 5. ENVIAR CORREO DE CONFIRMACIÓN
+        // ==========================================
+        window.enviarCorreoConfirmacion = function(nombre, correo, fecha, precio, incluyeDepto) {
+            if (!correo || correo === 'No registrado' || correo === '') {
+                alert("⚠️ Este cliente no tiene un correo registrado.");
+                return;
+            }
+
+            const asunto = encodeURIComponent(`Confirmación de Reserva - Casa Copal 🌿`);
+            
+            let cuerpo = `¡Hola ${nombre}!\n\n`;
+            cuerpo += `Este correo es para confirmar formalmente que hemos recibido tu anticipo y tu reserva en Casa Copal está 100% segura.\n\n`;
+            cuerpo += `🗓️ Fecha de tu evento: ${fecha}\n`;
+            
+            if (precio !== 'undefined' && precio !== 'null') {
+                cuerpo += `💵 Total Acordado: $${Number(precio).toLocaleString()} MXN\n`;
+            }
+            
+            if (incluyeDepto === true) {
+                cuerpo += `🛏️ Espacios: Salón Principal + Departamento Privado\n`;
+            } else {
+                cuerpo += `🏠 Espacios: Únicamente Salón Principal\n`;
+            }
+            
+            cuerpo += `\nNos da mucho gusto recibirte. Recuerda que el saldo restante se liquida máximo 1 día antes del evento.\n\n`;
+            cuerpo += `Si tienes alguna duda adicional, seguimos en contacto por WhatsApp.\n\n`;
+            cuerpo += `Atentamente,\nEquipo Casa Copal\ninfo@casacopal.com.mx`;
+
+            const enlaceCorreo = `mailto:${correo}?subject=${asunto}&body=${encodeURIComponent(cuerpo)}`;
+            window.open(enlaceCorreo, '_blank');
+        }
+
+        window.onload = function() {
+            window.generarManual();
+        };
+    </script>
+</body>
+</html>
