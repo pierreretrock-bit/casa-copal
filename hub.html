@@ -209,13 +209,64 @@
             <h2 class="text-3xl font-black text-slate-900 mb-6">Textos Operativos Rápidos</h2>
 
             <div class="space-y-6">
+                <!-- NUEVO: MENSAJE DE CONFIANZA -->
+                <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 border-l-4 border-l-blue-500">
+                    <div class="flex justify-between items-center mb-4">
+                        <h3 class="font-bold text-blue-800 uppercase tracking-wider text-sm flex items-center gap-2"><span>🤝</span> Respuesta a Reserva Web (Generar Confianza)</h3>
+                        <button onclick="copiarTexto('texto_confianza')" class="text-xs bg-blue-100 hover:bg-blue-200 text-blue-800 font-bold px-4 py-2 rounded-lg transition-colors shadow-sm">Copiar</button>
+                    </div>
+                    <p class="text-[11px] text-slate-500 mb-3 italic">Usa este texto justo después de que la página web te manda el mensaje automático del cliente. Da seguridad antes de pedir dinero.</p>
+                    <div class="bg-slate-50 p-4 rounded-xl border border-slate-100">
+                        <textarea id="texto_confianza" class="w-full bg-transparent text-sm text-slate-700 font-mono focus:outline-none resize-none min-h-[160px]" readonly>¡Hola! Qué gusto saludarte. Soy Fabiola del equipo de administración de Casa Copal. 🌿
+
+He recibido la alerta de nuestra página web y te confirmo que he pre-bloqueado tu fecha en nuestro sistema para que nadie más la tome.
+
+Sabemos que reservar por internet por primera vez puede generar dudas. Si gustas, antes de hacer tu depósito, puedes agendar una visita para conocer las instalaciones en persona sin ningún compromiso. ¡Queremos que te sientas 100% seguro! 
+
+Si ya estás listo para confirmar tu fecha, me avisas y te comparto los datos de nuestra cuenta oficial. ¡Quedo a tus órdenes!</textarea>
+                    </div>
+                </div>
+
+                <!-- NUEVO: DATOS BANCARIOS -->
+                <div class="bg-white p-6 rounded-2xl shadow-sm border border-indigo-200 border-l-4 border-l-indigo-500">
+                    <div class="flex justify-between items-center mb-4">
+                        <h3 class="font-bold text-indigo-800 uppercase tracking-wider text-sm flex items-center gap-2"><span>💳</span> Datos Bancarios Oficiales</h3>
+                        <button onclick="copiarTexto('texto_cuentas')" class="text-xs bg-indigo-100 hover:bg-indigo-200 text-indigo-800 font-bold px-4 py-2 rounded-lg transition-colors shadow-sm">Copiar</button>
+                    </div>
+                    <p class="text-[11px] text-slate-500 mb-3 italic">Envía esto cuando el cliente confirme que desea hacer el apartado. Incluye opciones claras y formales.</p>
+                    <div class="bg-slate-50 p-4 rounded-xl border border-slate-100">
+                        <textarea id="texto_cuentas" class="w-full bg-transparent text-sm text-slate-700 font-mono focus:outline-none resize-none min-h-[380px]" readonly>¡Excelente! Para asegurar tu fecha, te comparto las cuentas oficiales de Casa Copal. Puedes elegir la opción que te sea más cómoda:
+
+📲 OPCIÓN 1: Transferencia Interbancaria (SPEI)
+• Titular: Layra Nahomi Navar Vizcarra
+• Banco: Scotiabank
+• CLABE: 044041256060853998
+
+• Titular: Frania Michel Navar Vizcarra
+• Banco: BanBajío
+• CLABE: 030041900044377640
+
+🏪 OPCIÓN 2: Depósito en OXXO o Cajero
+(Dictar o ingresar número de tarjeta)
+• Tarjeta Scotiabank: 5579 2091 5649 7643
+• Tarjeta BanBajío: 4210 0300 5762 7619
+
+🏦 OPCIÓN 3: Depósito directo en Ventanilla
+• Scotiabank (Cuenta): 25606085399
+• BanBajío (Cuenta): 476494130201
+
+📸 IMPORTANTE: Una vez realizado tu pago, por favor envíame foto del comprobante (ticket o captura) por este medio. Con eso registraré tu anticipo y te enviaré tu Contrato Digital para formalizar la reserva. ¡Quedo al pendiente!</textarea>
+                    </div>
+                </div>
+
+                <!-- SEGUIMIENTO DE VENTA -->
                 <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200">
                     <div class="flex justify-between items-center mb-4">
-                        <h3 class="font-bold text-slate-800 uppercase tracking-wider text-sm flex items-center gap-2"><span>💬</span> Seguimiento de Venta</h3>
+                        <h3 class="font-bold text-slate-800 uppercase tracking-wider text-sm flex items-center gap-2"><span>💬</span> Seguimiento de Venta (Retargeting)</h3>
                         <button onclick="copiarTexto('texto2')" class="text-xs bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold px-4 py-2 rounded-lg transition-colors">Copiar</button>
                     </div>
                     <div class="bg-slate-50 p-4 rounded-xl border border-slate-100">
-                        <p id="texto2" class="text-sm text-slate-700 whitespace-pre-line font-mono">¡Hola! 👋 Solo paso a saludarte. Nuestra agenda se está llenando con los precios de preventa y quería saber si pudiste revisar la información o si te reservo alguna fecha sin compromiso. ¡Quedo a la orden!</p>
+                        <textarea id="texto2" class="w-full bg-transparent text-sm text-slate-700 font-mono focus:outline-none resize-none min-h-[60px]" readonly>¡Hola! 👋 Solo paso a saludarte. Nuestra agenda se está llenando con los precios de preventa y quería saber si pudiste revisar la información o si te reservo alguna fecha sin compromiso. ¡Quedo a la orden!</textarea>
                     </div>
                 </div>
 
@@ -477,7 +528,30 @@
         // ==========================================
         window.generarManual = function() {
             const codigo = document.getElementById('m_codigo').value || '[CÓDIGO]';
-            const manualTexto = `🌿 MANUAL DE BIENVENIDA - CASA COPAL 🌿\n¡Tu evento está listo! Aquí tienes todo lo que necesitas saber.\n\n🔓 1. TU ACCESO DIGITAL (SELF CHECK-IN)\nTu Código Único: *${codigo}*\n¿Cómo entrar? Digita tu código en la cerradura del portón principal y presiona el botón [# o candado]. (Se activa el día de tu evento).\n\n📹 2. INVENTARIO VIRTUAL (Protege tu depósito)\nAl entrar, *graba un video rápido (1 min)* mostrando que recibes el área limpia, baños en orden y el equipo completo:\n- Mobiliario: 39 sillas, 4 bancos, 1 mesa de madera (para 6 personas) y 6 mesas plegables.\n- Cocina: Asador, estufa, congelador y dispensador de agua en buen estado.\nEnvíalo a este WhatsApp en tus primeros 20 min.\n\n📶 3. CONECTIVIDAD\nRed Wi-Fi: MERCUSYS_2FB4\nContraseña: 83763557\n\n🥩 4. COCINA Y ASADOR\n- Asador: Al final, el fuego debe estar 100% apagado.\n- Congelador: Al irte, debe quedar completamente vacío.\n- Estufa: Verifica que las perillas queden apagadas y cerrar el tanque de gas tras su uso.\n\n🛑 5. REGLAS DE ORO\n- Ruido: Límite estricto de horario hasta las *11:00 PM (entre semana)* y *1:00 AM (fines de semana)*. A esa hora la música se apaga totalmente, coincidiendo con la hora de término de tu evento.\n- Capacidad: Máx 50 personas.\n- Alberca Segura: Estrictamente PROHIBIDO meter vidrio a la alberca.\n- Limpieza: No confeti metálico, globos con pintura o pirotecnia. Basura en los botes.\n\n📸 6. CHECK-OUT VIRTUAL (Salida)\nAl salir, envíanos 2 fotos para programar la devolución de tu depósito:\n1. Asador apagado y Congelador vacío.\n2. Basura dentro de sus respectivos botes.\n\n¡Gracias por cuidar de Casa Copal como si fuera tu casa!`;
+            const manualTexto = `🌿 ¡BIENVENIDOS A CASA COPAL! 🌿
+Tu evento está listo. Deseamos que pasen un día increíble en familia. Aquí tienes tu guía de acceso:
+
+🔓 1. TU ACCESO DIGITAL (SELF CHECK-IN)
+Tu código para entrar hoy es: *${codigo}*
+(Digita el código en la cerradura y presiona el candado. Se activa a tu hora de inicio).
+
+📶 2. RED WI-FI
+Red: MERCUSYS_2FB4
+Contraseña: 83763557
+
+📹 3. CHECK-IN VIRTUAL (Inventario)
+Para proteger tu depósito, al llegar tómate 1 minuto para enviarnos un *video rápido* mostrando que recibes el área limpia y completa (Mobiliario, asador, estufa, hielera). 
+
+🛑 4. TIPS PARA UN GRAN EVENTO
+• Ruido: Disfruta la música, pero recuerda apagarla puntualmente a tu hora de salida por respeto a los vecinos.
+• Alberca: Por tu seguridad, recuerda no usar cristal ni vidrio cerca del agua.
+
+📸 5. CHECK-OUT (Al irse)
+Antes de cerrar la puerta al final de tu evento, ayúdanos enviando al WhatsApp 2 fotos para procesar tu devolución:
+1. Asador apagado y sin fuego.
+2. Basura dentro de sus botes y refrigerador vacío.
+
+Si tienes alguna duda durante tu evento, escríbenos por aquí. ¡Que lo disfruten mucho! 🥳`;
             document.getElementById('m_resultado').value = manualTexto;
         }
 
@@ -522,7 +596,40 @@
             
             if (salon === 0 && depto === 0) desgloseCostos += `Costo Renta: $0 MXN\n`;
 
-            const contratoTexto = `*CONTRATO DE RENTA DE ESPACIO "CASA COPAL"* 🌿\nFECHA: ${fechaHoy}\n\n*1. LAS PARTES*\nArrendador: Casa Copal Eventos\nCliente: ${nombre}\n\n*2. DETALLES DEL EVENTO*\nFecha: ${fechaFormateada}\nHorario: De ${inicio} a ${fin} hrs.\nTipo: ${tipo} (Ambiente estrictamente familiar)\nMáximo Invitados: 50 personas.\n\n*3. COSTOS Y PAGOS*\n${desgloseCostos.trim()}\n*TOTAL A PAGAR:* $${totalFinal.toLocaleString()} MXN\n\nAnticipo Recibido: $${anticipo.toLocaleString()} MXN\n*SALDO A LIQUIDAR:* $${saldo.toLocaleString()} MXN (Máximo 1 día antes del evento)\n*DEPÓSITO GARANTÍA:* $1,500 MXN (Reembolsable 24hrs post-evento)\n\n*4. REGLAS PRINCIPALES (Cuidado de Instalaciones)*\nA) *RUIDO:* Música se apaga totalmente a la hora límite de término. Evitemos multas vecinales.\nB) *CRISTAL:* Estrictamente prohibido botellas/vasos de vidrio en área de alberca.\nC) *LIMPIEZA:* Asador sin fuego, estufa apagada, congelador vacío, basura en botes. No confeti metálico.\nD) *CHECK-IN/OUT VIRTUAL:* Obligatorio enviar video de entrada y fotos de salida para aplicar devolución de depósito.\n\n*5. CANCELACIONES*\nMenos de 6 días: No hay reembolso (se puede reagendar sujeto a disponibilidad).\n\n✍️ *FIRMA DIGITAL DE CONFORMIDAD*\nPara confirmar tu reserva, aceptar este contrato y asegurar tu fecha, por favor responde a este mensaje con la frase:\n*"Acepto términos y condiciones"*`;
+            const contratoTexto = `*CONTRATO DE RENTA DE ESPACIO "CASA COPAL"* 🌿
+FECHA: ${fechaHoy}
+
+*1. LAS PARTES*
+Arrendador: Casa Copal Eventos
+Cliente: ${nombre}
+
+*2. DETALLES DEL EVENTO*
+Fecha: ${fechaFormateada}
+Horario: De ${inicio} a ${fin} hrs.
+Tipo: ${tipo} (Ambiente familiar)
+Máximo Invitados: 50 personas.
+
+*3. FINANZAS*
+${desgloseCostos.trim()}
+*TOTAL A PAGAR:* $${totalFinal.toLocaleString()} MXN
+
+Anticipo Recibido: $${anticipo.toLocaleString()} MXN
+*SALDO A LIQUIDAR:* $${saldo.toLocaleString()} MXN (Máximo 1 día antes del evento).
+*DEPÓSITO EN GARANTÍA:* $1,500 MXN (Reembolsable 24hrs post-evento).
+
+*4. PENALIZACIONES (CONDICIONES DE GARANTÍA)*
+El depósito de $1,500 NO será devuelto en los siguientes casos:
+A) Ruido excesivo fuera de horario (La música debe apagarse a la hora de salida).
+B) Ingresar botellas/vasos de vidrio en área de alberca.
+C) Daños al mobiliario, uso de pirotecnia o confeti metálico.
+D) Dejar asador encendido, refrigerador sucio o basura fuera de su lugar.
+
+*5. CANCELACIONES*
+Cancelaciones con menos de 6 días de anticipación no son reembolsables.
+
+✍️ *FIRMA DIGITAL DE CONFORMIDAD*
+Para confirmar tu reserva, aceptar este contrato y asegurar tu fecha, por favor responde a este mensaje con la frase:
+*"Acepto términos y condiciones"*`;
 
             document.getElementById('c_resultado').value = contratoTexto;
         }
