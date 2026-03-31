@@ -44,26 +44,13 @@
         }
     </script>
 
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', 'G-XXXXXXXXXX');
-    </script>
-
     <style>
-        /* Animaciones Personalizadas */
         .hero-overlay {
             background: linear-gradient(to bottom, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.5) 100%);
         }
-        /* Ocultar scrollbar en elementos horizontales */
         .hide-scrollbar::-webkit-scrollbar {
             display: none;
         }
-        
-        /* Estilos del Calendario Interactivo */
         .calendar-day {
             transition: all 0.2s;
             cursor: pointer;
@@ -79,17 +66,11 @@
             background-color: transparent;
             transform: none;
         }
-        .calendar-day.disabled:hover {
-            background-color: transparent;
-            color: #cbd5e1;
-        }
         .calendar-day.selected {
             background-color: #2C3E50;
             color: white;
             font-weight: bold;
         }
-        
-        /* Estilo para días reservados (Base de Datos) */
         .calendar-day.reserved {
             background-color: #fee2e2;
             color: #ef4444;
@@ -98,12 +79,6 @@
             text-decoration: line-through;
             transform: none;
         }
-        .calendar-day.reserved:hover {
-            background-color: #fee2e2;
-            color: #ef4444;
-        }
-        
-        /* Toggle Switch Checkbox */
         .toggle-checkbox:checked {
             right: 0;
             border-color: #D97757;
@@ -119,15 +94,12 @@
     <nav class="fixed w-full z-50 transition-all duration-300 bg-white/95 backdrop-blur-sm shadow-sm" id="navbar">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between items-center h-20">
-                <!-- Logo -->
                 <div class="flex-shrink-0 flex items-center gap-3 cursor-pointer" onclick="window.scrollTo(0,0)">
                     <div class="w-10 h-10 bg-terracota rounded-full flex items-center justify-center text-white">
                         <i class="fa-solid fa-leaf"></i>
                     </div>
                     <span class="font-serif font-bold text-2xl tracking-wider text-carbon">Casa Copal</span>
                 </div>
-
-                <!-- Menú Desktop -->
                 <div class="hidden md:flex items-center space-x-8">
                     <a href="#salon" class="text-sm font-medium hover:text-terracota transition-colors">Salón</a>
                     <a href="#departamento" class="text-sm font-medium hover:text-terracota transition-colors">Hospedaje</a>
@@ -136,8 +108,6 @@
                         Reservar Ahora
                     </a>
                 </div>
-
-                <!-- Botón Móvil -->
                 <div class="md:hidden flex items-center">
                     <button id="mobile-menu-btn" class="text-carbon hover:text-terracota focus:outline-none p-2">
                         <i class="fa-solid fa-bars text-2xl"></i>
@@ -145,8 +115,6 @@
                 </div>
             </div>
         </div>
-
-        <!-- Menú Móvil Desplegable -->
         <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-gray-100 absolute w-full shadow-lg">
             <div class="px-4 pt-2 pb-6 space-y-2 flex flex-col text-center">
                 <a href="#salon" class="block px-3 py-3 text-base font-medium hover:bg-gray-50 rounded-lg">Salón de Eventos</a>
@@ -157,88 +125,44 @@
         </div>
     </nav>
 
-    <!-- HERO SECTION -->
+    <!-- HERO -->
     <div class="relative h-screen flex items-center justify-center overflow-hidden">
-        <!-- Imagen de Fondo -->
         <div class="absolute inset-0 z-0">
             <img src="https://i.postimg.cc/x1c38XjB/foto_6.jpg" alt="Casa Copal Alberca Noche" class="w-full h-full object-cover animate-[pulse_20s_ease-in-out_infinite]">
             <div class="absolute inset-0 hero-overlay"></div>
         </div>
-
-        <!-- Contenido -->
-        <div class="relative z-10 text-center px-4 max-w-4xl mx-auto mt-16" data-aos="fade-up" data-aos-duration="1000">
+        <div class="relative z-10 text-center px-4 max-w-4xl mx-auto mt-16" data-aos="fade-up">
             <span class="block text-terracota font-bold tracking-[0.2em] uppercase text-sm mb-4">Exclusividad & Confort</span>
-            <h1 class="text-5xl md:text-7xl font-serif text-white leading-tight mb-6">
-                Tu espacio ideal para eventos en Los Cabos
-            </h1>
-            <p class="text-lg md:text-xl text-gray-200 mb-10 font-light max-w-2xl mx-auto">
-                Disfruta de instalaciones privadas con alberca, áreas techadas frescas y la opción de hospedaje para extender tu experiencia.
-            </p>
+            <h1 class="text-5xl md:text-7xl font-serif text-white leading-tight mb-6">Tu espacio ideal para eventos en Los Cabos</h1>
+            <p class="text-lg md:text-xl text-gray-200 mb-10 font-light max-w-2xl mx-auto">Disfruta de instalaciones privadas con alberca, áreas techadas frescas y la opción de hospedaje.</p>
             <div class="flex flex-col sm:flex-row gap-4 justify-center">
-                <a href="#calendario" class="bg-terracota text-white px-8 py-4 rounded-full font-bold text-lg hover:bg-terracotaDark hover:-translate-y-1 transition-all shadow-[0_10px_20px_rgba(217,119,87,0.3)]">
-                    Agendar Fecha
-                </a>
-                <a href="https://wa.me/526243203289" target="_blank" class="bg-white text-carbon px-8 py-4 rounded-full font-bold text-lg hover:bg-gray-100 hover:-translate-y-1 transition-all shadow-lg flex items-center justify-center gap-2">
+                <a href="#calendario" class="bg-terracota text-white px-8 py-4 rounded-full font-bold text-lg hover:bg-terracotaDark shadow-lg transition-all">Agendar Fecha</a>
+                <a href="https://wa.me/526243203289" target="_blank" class="bg-white text-carbon px-8 py-4 rounded-full font-bold text-lg hover:bg-gray-100 shadow-lg flex items-center justify-center gap-2">
                     <i class="fa-brands fa-whatsapp text-green-500 text-xl"></i> Reservar por WhatsApp
                 </a>
             </div>
         </div>
-
-        <!-- Scroll Indicator -->
-        <div class="absolute bottom-10 left-1/2 transform -translate-x-1/2 z-10 animate-bounce">
-            <a href="#salon" class="text-white/70 hover:text-white transition-colors">
-                <i class="fa-solid fa-chevron-down text-2xl"></i>
-            </a>
-        </div>
     </div>
 
-    <!-- SECCIÓN: SALÓN DE EVENTOS -->
+    <!-- SECCIÓN: SALÓN -->
     <section id="salon" class="py-24 bg-white">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
                 <div data-aos="fade-right">
                     <h2 class="text-terracota font-bold tracking-widest uppercase text-sm mb-2">Salón Principal</h2>
                     <h3 class="text-4xl md:text-5xl font-serif mb-6 text-carbon leading-tight">Diseñado para celebrar sin preocupaciones</h3>
-                    <p class="text-gray-600 mb-8 text-lg leading-relaxed">
-                        Celebra en un espacio diseñado para tu máximo confort. Relájate en nuestra fresca y amplia área techada, ideal para resguardarte del sol mientras mantienes una vista perfecta hacia la alberca y disfrutas al aire libre.
-                    </p>
-                    
+                    <p class="text-gray-600 mb-8 text-lg">Relájate en nuestra fresca y amplia área techada, ideal para resguardarte del sol mientras disfrutas al aire libre.</p>
                     <ul class="space-y-4 mb-10">
-                        <li class="flex items-center gap-4 text-gray-700 font-medium">
-                            <div class="w-12 h-12 rounded-full bg-oliva/10 text-oliva flex items-center justify-center text-xl shrink-0"><i class="fa-solid fa-users"></i></div>
-                            Capacidad estricta para 50 personas (Ambiente familiar).
-                        </li>
-                        <li class="flex items-center gap-4 text-gray-700 font-medium">
-                            <div class="w-12 h-12 rounded-full bg-terracota/10 text-terracota flex items-center justify-center text-xl shrink-0"><i class="fa-solid fa-cloud-sun"></i></div>
-                            Área techada con excelente sombra y ventilación.
-                        </li>
-                        <li class="flex items-center gap-4 text-gray-700 font-medium">
-                            <div class="w-12 h-12 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center text-xl shrink-0"><i class="fa-solid fa-water-ladder"></i></div>
-                            Alberca iluminada exclusiva para tu evento.
-                        </li>
-                        <li class="flex items-center gap-4 text-gray-700 font-medium">
-                            <div class="w-12 h-12 rounded-full bg-orange-100 text-orange-600 flex items-center justify-center text-xl shrink-0"><i class="fa-solid fa-fire-burner"></i></div>
-                            Cocina exterior equipada con asador, estufa, congelador y hielera grande.
-                        </li>
-                        <li class="flex items-center gap-4 text-gray-700 font-medium">
-                            <div class="w-12 h-12 rounded-full bg-slate-100 text-slate-600 flex items-center justify-center text-xl shrink-0"><i class="fa-solid fa-restroom"></i></div>
-                            Dos baños a tu disposición: uno exterior y un baño completo con regadera en el interior.
-                        </li>
+                        <li class="flex items-center gap-4 text-gray-700 font-medium"><div class="w-10 h-10 rounded-full bg-oliva/10 text-oliva flex items-center justify-center shrink-0"><i class="fa-solid fa-users"></i></div> Máx 50 personas (Ambiente familiar).</li>
+                        <li class="flex items-center gap-4 text-gray-700 font-medium"><div class="w-10 h-10 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center shrink-0"><i class="fa-solid fa-water-ladder"></i></div> Alberca iluminada exclusiva.</li>
+                        <li class="flex items-center gap-4 text-gray-700 font-medium"><div class="w-10 h-10 rounded-full bg-orange-100 text-orange-600 flex items-center justify-center shrink-0"><i class="fa-solid fa-fire-burner"></i></div> Cocina exterior equipada con asador.</li>
                     </ul>
                 </div>
-                
                 <div class="grid gap-4 h-[600px]" data-aos="fade-left">
-                    <div class="h-[350px] w-full overflow-hidden rounded-3xl shadow-lg relative">
-                        <img src="https://i.postimg.cc/Xq68hKSx/foto_1.png" alt="Exterior Salón" class="w-full h-full object-cover hover:scale-105 transition-transform duration-700">
-                    </div>
+                    <div class="h-[350px] w-full overflow-hidden rounded-3xl shadow-lg"><img src="https://i.postimg.cc/Xq68hKSx/foto_1.png" class="w-full h-full object-cover"></div>
                     <div class="grid grid-cols-2 gap-4 h-[234px]">
-                        <div class="overflow-hidden rounded-3xl shadow-lg relative">
-                            <img src="https://i.postimg.cc/VkdWvJL1/foto_4.png" alt="Área de asador" class="w-full h-full object-cover hover:scale-105 transition-transform duration-700">
-                        </div>
-                        <div class="overflow-hidden rounded-3xl shadow-lg relative">
-                            <!-- Interior techado real sin el texto encima -->
-                            <img src="https://i.postimg.cc/6q3WsLG3/interior_techado.jpg" alt="Interior techado" class="w-full h-full object-cover hover:scale-105 transition-transform duration-700">
-                        </div>
+                        <div class="overflow-hidden rounded-3xl shadow-lg"><img src="https://i.postimg.cc/VkdWvJL1/foto_4.png" class="w-full h-full object-cover"></div>
+                        <div class="overflow-hidden rounded-3xl shadow-lg"><img src="https://i.postimg.cc/6q3WsLG3/interior_techado.jpg" class="w-full h-full object-cover"></div>
                     </div>
                 </div>
             </div>
@@ -249,272 +173,61 @@
     <section id="departamento" class="py-24 bg-arena">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center flex-col-reverse lg:flex-row-reverse">
-                
                 <div data-aos="fade-left">
                     <h2 class="text-oliva font-bold tracking-widest uppercase text-sm mb-2">Hospedaje Privado</h2>
                     <h3 class="text-4xl md:text-5xl font-serif mb-6 text-carbon leading-tight">Extiende tu experiencia y descansa</h3>
-                    <p class="text-gray-600 mb-8 text-lg leading-relaxed">
-                        ¿Tu evento terminó tarde y no quieres manejar? ¿O buscas un espacio privado con alberca para pasar el fin de semana con tu familia lejos del bullicio? Nuestro departamento en planta alta te ofrece total privacidad y descanso a unos pasos del área de convivencia.
-                    </p>
-                    
+                    <p class="text-gray-600 mb-8 text-lg">Nuestro departamento en planta alta te ofrece total privacidad y descanso a unos pasos del área de convivencia.</p>
                     <div class="grid grid-cols-2 gap-6 mb-10">
-                        <div class="bg-white p-5 rounded-2xl shadow-sm">
-                            <i class="fa-solid fa-bed text-3xl text-oliva mb-2"></i>
-                            <h4 class="font-bold text-carbon mb-1">Cama Queen Size</h4>
-                            <p class="text-sm text-gray-500">Confort premium para descansar.</p>
-                        </div>
-                        <div class="bg-white p-5 rounded-2xl shadow-sm">
-                            <i class="fa-solid fa-couch text-3xl text-oliva mb-2"></i>
-                            <h4 class="font-bold text-carbon mb-1">Sala de Estar</h4>
-                            <p class="text-sm text-gray-500">Espacio amplio e iluminado.</p>
-                        </div>
-                        <div class="bg-white p-5 rounded-2xl shadow-sm">
-                            <i class="fa-solid fa-kitchen-set text-3xl text-oliva mb-2"></i>
-                            <h4 class="font-bold text-carbon mb-1">Cocina Equipada</h4>
-                            <p class="text-sm text-gray-500">Lista para tus alimentos.</p>
-                        </div>
-                        <div class="bg-white p-5 rounded-2xl shadow-sm">
-                            <i class="fa-solid fa-wifi text-3xl text-oliva mb-2"></i>
-                            <span class="font-bold text-carbon text-sm">Wi-Fi Alta Velocidad</span>
-                            <span class="text-xs text-gray-500">Gratis</span>
-                        </div>
+                        <div class="bg-white p-5 rounded-2xl shadow-sm"><i class="fa-solid fa-bed text-2xl text-oliva mb-2"></i><h4 class="font-bold text-sm">Cama Queen Size</h4></div>
+                        <div class="bg-white p-5 rounded-2xl shadow-sm"><i class="fa-solid fa-kitchen-set text-2xl text-oliva mb-2"></i><h4 class="font-bold text-sm">Cocina Equipada</h4></div>
                     </div>
-                    <a href="https://wa.me/526243203289?text=Hola,%20me%20interesa%20información%20sobre%20el%20hospedaje%20en%20Casa%20Copal" target="_blank" class="text-terracota font-bold hover:text-terracotaDark flex items-center gap-2 text-lg">
-                        Consultar tarifas del hospedaje <i class="fa-solid fa-arrow-right"></i>
-                    </a>
+                    <a href="https://wa.me/526243203289" target="_blank" class="text-terracota font-bold flex items-center gap-2 text-lg">Consultar tarifas del hospedaje <i class="fa-solid fa-arrow-right"></i></a>
                 </div>
-
                 <div class="relative h-[600px]" data-aos="fade-right">
-                    <div class="absolute top-0 right-0 w-4/5 h-4/5 rounded-3xl overflow-hidden shadow-2xl z-10">
-                        <img src="https://i.postimg.cc/K4XQyFBj/20260201_232054000_i_OS.jpg" alt="Recámara Departamento" class="w-full h-full object-cover hover:scale-105 transition-transform duration-700">
-                    </div>
-                    <div class="absolute bottom-0 left-0 w-2/3 h-2/3 rounded-3xl overflow-hidden shadow-2xl border-8 border-arena z-20">
-                        <img src="https://i.postimg.cc/WtRSPjgb/cocina.jpg" alt="Cocina Departamento" class="w-full h-full object-cover hover:scale-105 transition-transform duration-700">
-                    </div>
+                    <div class="absolute top-0 right-0 w-4/5 h-4/5 rounded-3xl overflow-hidden shadow-2xl z-10"><img src="https://i.postimg.cc/K4XQyFBj/20260201_232054000_i_OS.jpg" class="w-full h-full object-cover"></div>
+                    <div class="absolute bottom-0 left-0 w-2/3 h-2/3 rounded-3xl overflow-hidden shadow-2xl border-8 border-arena z-20"><img src="https://i.postimg.cc/WtRSPjgb/cocina.jpg" class="w-full h-full object-cover"></div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- SECCIÓN: GALERÍA -->
+    <!-- GALERÍA -->
     <section id="galeria" class="py-24 bg-white">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-16" data-aos="fade-up">
-                <h2 class="text-terracota font-bold tracking-widest uppercase text-sm mb-2">Conoce el lugar</h2>
-                <h3 class="text-4xl md:text-5xl font-serif text-carbon">Galería de Fotos</h3>
+                <h2 class="text-terracota font-bold uppercase text-sm mb-2">Conoce el lugar</h2>
+                <h3 class="text-4xl font-serif text-carbon">Galería de Fotos</h3>
             </div>
-
-            <!-- Filtros Galería -->
-            <div class="flex justify-center gap-4 mb-12" data-aos="fade-up" data-aos-delay="100">
-                <button class="filter-btn active bg-carbon text-white px-6 py-2 rounded-full text-sm font-bold transition-colors shadow-md" data-filter="all">Todos</button>
-                <button class="filter-btn bg-gray-100 text-gray-600 hover:bg-gray-200 px-6 py-2 rounded-full text-sm font-bold transition-colors" data-filter="salon">Salón</button>
-                <button class="filter-btn bg-gray-100 text-gray-600 hover:bg-gray-200 px-6 py-2 rounded-full text-sm font-bold transition-colors" data-filter="depto">Departamento</button>
-            </div>
-
-            <!-- Grid de Imágenes -->
             <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6" id="gallery-grid">
-                
-                <!-- ====== FOTOS DEL SALÓN ====== -->
-                <div class="gallery-item salon aspect-square overflow-hidden rounded-2xl cursor-pointer shadow-sm" data-aos="zoom-in" onclick="openModal('https://i.postimg.cc/Xq68hKSx/foto_1.png')">
-                    <img src="https://i.postimg.cc/Xq68hKSx/foto_1.png" alt="Exterior Día" class="w-full h-full object-cover transition-all duration-500 hover:scale-105 hover:brightness-110">
-                </div>
-                <div class="gallery-item salon aspect-square overflow-hidden rounded-2xl cursor-pointer shadow-sm" data-aos="zoom-in" data-aos-delay="100" onclick="openModal('https://i.postimg.cc/x1c38XjB/foto_6.jpg')">
-                    <img src="https://i.postimg.cc/x1c38XjB/foto_6.jpg" alt="Alberca Noche" class="w-full h-full object-cover transition-all duration-500 hover:scale-105 hover:brightness-110">
-                </div>
-                <div class="gallery-item salon aspect-square overflow-hidden rounded-2xl cursor-pointer shadow-sm" data-aos="zoom-in" data-aos-delay="200" onclick="openModal('https://i.postimg.cc/VkdWvJL1/foto_4.png')">
-                    <img src="https://i.postimg.cc/VkdWvJL1/foto_4.png" alt="Asador" class="w-full h-full object-cover transition-all duration-500 hover:scale-105 hover:brightness-110">
-                </div>
-                <div class="gallery-item salon aspect-square overflow-hidden rounded-2xl cursor-pointer shadow-sm" data-aos="zoom-in" onclick="openModal('https://i.postimg.cc/jSL42DdT/foto_3.png')">
-                    <img src="https://i.postimg.cc/jSL42DdT/foto_3.png" alt="Área de Mesas" class="w-full h-full object-cover transition-all duration-500 hover:scale-105 hover:brightness-110">
-                </div>
-                <div class="gallery-item salon aspect-square overflow-hidden rounded-2xl cursor-pointer shadow-sm" data-aos="zoom-in" data-aos-delay="100" onclick="openModal('https://i.postimg.cc/SRsS07zj/foto_2.png')">
-                    <img src="https://i.postimg.cc/SRsS07zj/foto_2.png" alt="Vista Alberca" class="w-full h-full object-cover transition-all duration-500 hover:scale-105 hover:brightness-110">
-                </div>
-                <div class="gallery-item salon aspect-square overflow-hidden rounded-2xl cursor-pointer shadow-sm" data-aos="zoom-in" data-aos-delay="200" onclick="openModal('https://i.postimg.cc/6q3WsLG3/interior_techado.jpg')">
-                    <img src="https://i.postimg.cc/6q3WsLG3/interior_techado.jpg" alt="Interior Techado" class="w-full h-full object-cover transition-all duration-500 hover:scale-105 hover:brightness-110">
-                </div>
-                <div class="gallery-item salon aspect-square overflow-hidden rounded-2xl cursor-pointer shadow-sm" data-aos="zoom-in" onclick="openModal('https://i.postimg.cc/tTrDTzcD/bano-interor.jpg', true)">
-                    <img src="https://i.postimg.cc/tTrDTzcD/bano-interor.jpg" alt="Baño Interior" class="w-full h-full object-cover transition-transform duration-500 -rotate-90 scale-[1.35] hover:scale-[1.45] hover:brightness-110">
-                </div>
-                <div class="gallery-item salon aspect-square overflow-hidden rounded-2xl cursor-pointer shadow-sm" data-aos="zoom-in" data-aos-delay="100" onclick="openModal('https://i.postimg.cc/Hnddvgmq/bano-exterior.jpg')">
-                    <img src="https://i.postimg.cc/Hnddvgmq/bano-exterior.jpg" alt="Baño Exterior" class="w-full h-full object-cover transition-all duration-500 hover:scale-105 hover:brightness-110">
-                </div>
-                <div class="gallery-item salon aspect-square overflow-hidden rounded-2xl cursor-pointer shadow-sm" data-aos="zoom-in" data-aos-delay="200" onclick="openModal('https://i.postimg.cc/rm6rmKGL/foto7.jpg')">
-                    <img src="https://i.postimg.cc/rm6rmKGL/foto7.jpg" alt="Detalles Salón" class="w-full h-full object-cover transition-all duration-500 hover:scale-105 hover:brightness-110">
-                </div>
-                
-                <!-- ====== FOTOS DEL DEPARTAMENTO ====== -->
-                <div class="gallery-item depto aspect-square overflow-hidden rounded-2xl cursor-pointer shadow-sm" data-aos="zoom-in" onclick="openModal('https://i.postimg.cc/K4XQyFBj/20260201_232054000_i_OS.jpg')">
-                    <img src="https://i.postimg.cc/K4XQyFBj/20260201_232054000_i_OS.jpg" alt="Recámara" class="w-full h-full object-cover transition-all duration-500 hover:scale-105 hover:brightness-110">
-                </div>
-                <div class="gallery-item depto aspect-square overflow-hidden rounded-2xl cursor-pointer shadow-sm" data-aos="zoom-in" data-aos-delay="100" onclick="openModal('https://i.postimg.cc/WtRSPjgb/cocina.jpg')">
-                    <img src="https://i.postimg.cc/WtRSPjgb/cocina.jpg" alt="Cocina Sala" class="w-full h-full object-cover transition-all duration-500 hover:scale-105 hover:brightness-110">
-                </div>
-                <div class="gallery-item depto aspect-square overflow-hidden rounded-2xl cursor-pointer shadow-sm" data-aos="zoom-in" data-aos-delay="200" onclick="openModal('https://i.postimg.cc/cL22hvVG/bano-2.jpg', true)">
-                    <img src="https://i.postimg.cc/cL22hvVG/bano-2.jpg" alt="Baño 1" class="w-full h-full object-cover transition-transform duration-500 -rotate-90 scale-[1.35] hover:scale-[1.45] hover:brightness-110">
-                </div>
-                <div class="gallery-item depto aspect-square overflow-hidden rounded-2xl cursor-pointer shadow-sm" data-aos="zoom-in" onclick="openModal('https://i.postimg.cc/9z31jVZR/20260201_232134000_i_OS.jpg')">
-                    <img src="https://i.postimg.cc/9z31jVZR/20260201_232134000_i_OS.jpg" alt="Sala de Estar" class="w-full h-full object-cover transition-all duration-500 hover:scale-105 hover:brightness-110">
-                </div>
-                <div class="gallery-item depto aspect-square overflow-hidden rounded-2xl cursor-pointer shadow-sm" data-aos="zoom-in" data-aos-delay="100" onclick="openModal('https://i.postimg.cc/s1FKRy7g/baño.jpg')">
-                    <img src="https://i.postimg.cc/s1FKRy7g/baño.jpg" alt="Baño 2" class="w-full h-full object-cover transition-all duration-500 hover:scale-105 hover:brightness-110">
-                </div>
-                <div class="gallery-item depto aspect-square overflow-hidden rounded-2xl cursor-pointer shadow-sm" data-aos="zoom-in" data-aos-delay="200" onclick="openModal('https://i.postimg.cc/L5x5zXP4/20260203-054535000-i-OS-1.jpg')">
-                    <img src="https://i.postimg.cc/L5x5zXP4/20260203-054535000-i-OS-1.jpg" alt="Recámara Vista 2" class="w-full h-full object-cover transition-all duration-500 hover:scale-105 hover:brightness-110">
-                </div>
+                <div class="aspect-square overflow-hidden rounded-2xl cursor-pointer shadow-sm" onclick="openModal('https://i.postimg.cc/Xq68hKSx/foto_1.png')"><img src="https://i.postimg.cc/Xq68hKSx/foto_1.png" class="w-full h-full object-cover hover:scale-105 transition-all"></div>
+                <div class="aspect-square overflow-hidden rounded-2xl cursor-pointer shadow-sm" onclick="openModal('https://i.postimg.cc/x1c38XjB/foto_6.jpg')"><img src="https://i.postimg.cc/x1c38XjB/foto_6.jpg" class="w-full h-full object-cover hover:scale-105 transition-all"></div>
+                <div class="aspect-square overflow-hidden rounded-2xl cursor-pointer shadow-sm" onclick="openModal('https://i.postimg.cc/VkdWvJL1/foto_4.png')"><img src="https://i.postimg.cc/VkdWvJL1/foto_4.png" class="w-full h-full object-cover hover:scale-105 transition-all"></div>
             </div>
         </div>
     </section>
 
-    <!-- Modal para ver imágenes grandes -->
     <div id="image-modal" class="fixed inset-0 z-[100] hidden bg-black/95 backdrop-blur-sm flex items-center justify-center opacity-0 transition-opacity duration-300">
-        <button onclick="closeModal()" class="absolute top-6 right-6 text-white hover:text-terracota text-4xl focus:outline-none">
-            <i class="fa-solid fa-xmark"></i>
-        </button>
-        <img id="modal-img" src="" alt="Imagen ampliada" class="max-h-[90vh] max-w-[95vw] object-contain rounded-lg shadow-2xl transition-transform duration-300">
+        <button onclick="closeModal()" class="absolute top-6 right-6 text-white text-4xl"><i class="fa-solid fa-xmark"></i></button>
+        <img id="modal-img" src="" class="max-h-[90vh] max-w-[95vw] object-contain rounded-lg">
     </div>
 
-    <!-- SECCIÓN: CALENDARIO INTERACTIVO -->
+    <!-- CALENDARIO -->
     <section id="calendario" class="py-24 bg-arena">
         <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-12" data-aos="fade-up">
-                <h2 class="text-oliva font-bold tracking-widest uppercase text-sm mb-2">Reserva tu Evento</h2>
-                <h3 class="text-4xl md:text-5xl font-serif text-carbon mb-4">Disponibilidad y Cotizador</h3>
-                <p class="text-gray-600">Selecciona una fecha en el calendario para calcular el costo de tu evento.</p>
+                <h3 class="text-4xl font-serif text-carbon mb-4">Disponibilidad y Cotizador</h3>
+                <p class="text-gray-600">Selecciona una fecha para calcular el costo.</p>
             </div>
-
-            <!-- Contenedor del Calendario -->
-            <div class="bg-white rounded-3xl shadow-lg p-6 md:p-10" data-aos="fade-up" data-aos-delay="100">
-                
-                <!-- Navegación del mes -->
+            <div class="bg-white rounded-3xl shadow-lg p-6 md:p-10">
                 <div class="flex justify-between items-center mb-6">
-                    <button onclick="changeMonth(-1)" class="w-10 h-10 rounded-full flex items-center justify-center hover:bg-gray-100 text-carbon transition-colors">
-                        <i class="fa-solid fa-chevron-left"></i>
-                    </button>
-                    <h4 id="calendar-month-year" class="text-2xl font-bold text-carbon capitalize">Abril 2026</h4>
-                    <button onclick="changeMonth(1)" class="w-10 h-10 rounded-full flex items-center justify-center hover:bg-gray-100 text-carbon transition-colors">
-                        <i class="fa-solid fa-chevron-right"></i>
-                    </button>
+                    <button onclick="changeMonth(-1)" class="w-10 h-10 hover:bg-gray-100 rounded-full"><i class="fa-solid fa-chevron-left"></i></button>
+                    <h4 id="calendar-month-year" class="text-xl font-bold capitalize">Mes Año</h4>
+                    <button onclick="changeMonth(1)" class="w-10 h-10 hover:bg-gray-100 rounded-full"><i class="fa-solid fa-chevron-right"></i></button>
                 </div>
-
-                <!-- Días de la semana -->
-                <div class="grid grid-cols-7 text-center mb-2">
-                    <div class="font-bold text-gray-400 text-xs uppercase tracking-wider">Dom</div>
-                    <div class="font-bold text-gray-400 text-xs uppercase tracking-wider">Lun</div>
-                    <div class="font-bold text-gray-400 text-xs uppercase tracking-wider">Mar</div>
-                    <div class="font-bold text-gray-400 text-xs uppercase tracking-wider">Mié</div>
-                    <div class="font-bold text-gray-400 text-xs uppercase tracking-wider">Jue</div>
-                    <div class="font-bold text-gray-400 text-xs uppercase tracking-wider">Vie</div>
-                    <div class="font-bold text-gray-400 text-xs uppercase tracking-wider">Sáb</div>
+                <div class="grid grid-cols-7 text-center mb-2 font-bold text-xs uppercase text-gray-400">
+                    <div>Dom</div><div>Lun</div><div>Mar</div><div>Mié</div><div>Jue</div><div>Vie</div><div>Sáb</div>
                 </div>
-
-                <!-- Cuadrícula de días -->
-                <div id="calendar-grid" class="grid grid-cols-7 gap-2 md:gap-4 text-center">
-                    <!-- Los días se inyectan con JavaScript -->
-                </div>
-                
-                <div class="mt-6 text-center text-sm text-gray-500">
-                    <span class="inline-flex items-center gap-1"><div class="w-3 h-3 rounded-full bg-[#cbd5e1]"></div> Pasado</span>
-                    <span class="inline-flex items-center gap-1 ml-4"><div class="w-3 h-3 rounded-full bg-red-100 border border-red-300"></div> No Disponible</span>
-                    <span class="inline-flex items-center gap-1 ml-4"><div class="w-3 h-3 rounded-full bg-white border border-gray-300"></div> Disponible</span>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- MODAL DE COTIZACIÓN -->
-    <div id="booking-modal" class="fixed inset-0 z-[100] hidden bg-black/60 backdrop-blur-sm flex items-center justify-center opacity-0 transition-opacity duration-300">
-        <div class="bg-white rounded-3xl w-full max-w-md mx-4 overflow-hidden shadow-2xl transform scale-95 transition-transform duration-300 max-h-[90vh] overflow-y-auto" id="booking-modal-content">
-            <!-- Header Modal -->
-            <div class="bg-carbon text-white p-6 relative">
-                <button onclick="closeBookingModal()" class="absolute top-4 right-4 text-gray-300 hover:text-white">
-                    <i class="fa-solid fa-xmark text-xl"></i>
-                </button>
-                <p class="text-sm font-bold text-terracota tracking-widest uppercase mb-1">Cotización</p>
-                <h3 class="text-2xl font-serif" id="selected-date-display">Sábado, 15 de Mayo 2026</h3>
-            </div>
-            
-            <!-- Cuerpo Modal -->
-            <div class="p-6">
-                <div class="space-y-4 mb-6">
-                    <div class="flex justify-between items-center pb-4 border-b border-gray-100">
-                        <div>
-                            <p class="font-bold text-carbon text-lg">Renta del Salón</p>
-                            <p class="text-xs text-gray-500" id="price-type-label">Tarifa Fin de Semana</p>
-                        </div>
-                        <p class="font-black text-xl text-carbon" id="base-price-display">$5,000</p>
-                    </div>
-
-                    <!-- Toggle Departamento -->
-                    <div class="flex justify-between items-center bg-arena p-4 rounded-xl border border-gray-200">
-                        <div>
-                            <p class="font-bold text-carbon">Agregar Departamento</p>
-                            <p class="text-xs text-gray-500" id="depto-price-label">+$2,000 MXN</p>
-                        </div>
-                        <div class="relative inline-block w-12 mr-2 align-middle select-none transition duration-200 ease-in">
-                            <input type="checkbox" name="toggle" id="depto-toggle" class="toggle-checkbox absolute block w-6 h-6 rounded-full bg-white border-4 appearance-none cursor-pointer z-10"/>
-                            <label for="depto-toggle" class="toggle-label block overflow-hidden h-6 rounded-full bg-gray-300 cursor-pointer"></label>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- NUEVO: Datos del Cliente -->
-                <div class="space-y-3 mb-6 bg-gray-50 p-4 rounded-xl border border-gray-200">
-                    <p class="font-bold text-carbon text-sm">Tus Datos para la Reserva</p>
-                    <input type="text" id="cliente-nombre" placeholder="Nombre completo" class="w-full p-3 rounded-lg border border-gray-300 focus:outline-none focus:border-terracota focus:ring-1 focus:ring-terracota text-sm" required>
-                    <input type="tel" id="cliente-telefono" placeholder="Teléfono / WhatsApp" class="w-full p-3 rounded-lg border border-gray-300 focus:outline-none focus:border-terracota focus:ring-1 focus:ring-terracota text-sm" required>
-                    <input type="email" id="cliente-correo" placeholder="Correo electrónico" class="w-full p-3 rounded-lg border border-gray-300 focus:outline-none focus:border-terracota focus:ring-1 focus:ring-terracota text-sm" required>
-                    <p id="error-datos" class="text-red-500 text-xs font-bold hidden"><i class="fa-solid fa-triangle-exclamation"></i> Por favor, completa todos los campos para continuar.</p>
-                </div>
-
-                <!-- Total -->
-                <div class="flex justify-between items-end mb-6">
-                    <p class="text-gray-500 font-medium">Total Estimado:</p>
-                    <p class="text-4xl font-black text-terracota" id="total-price-display">$5,000</p>
-                </div>
-                
-                <p class="text-xs text-gray-500 mb-6 text-center bg-gray-50 p-3 rounded-lg border border-gray-100">
-                    <i class="fa-solid fa-lock text-terracota mr-1"></i> Al confirmar, la fecha quedará apartada en el sistema y te enviaremos por WhatsApp los datos para realizar tu depósito o transferencia.
-                </p>
-
-                <!-- Botón de Envío -->
-                <button id="btn-confirmar" onclick="confirmarReserva()" class="w-full bg-carbon text-white font-bold py-4 rounded-full flex items-center justify-center gap-2 hover:bg-terracota transition-colors shadow-lg">
-                    Confirmar Reserva
-                </button>
-            </div>
-        </div>
-    </div>
-
-    <!-- SECCIÓN: TESTIMONIOS -->
-    <section id="testimonios" class="py-24 bg-white">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <h2 class="text-4xl font-serif text-carbon mb-12">Lo que dicen nuestros invitados</h2>
-            
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <!-- Testimonio 1 -->
-                <div class="bg-arena p-8 rounded-3xl" data-aos="fade-up">
-                    <div class="text-yellow-400 text-xl mb-4">
-                        <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
-                    </div>
-                    <p class="text-gray-600 mb-6 italic">"El lugar está hermoso y súper privado. Festejamos el cumpleaños de mi esposo y la alberca fue la sensación. La zona techada es muy fresca y amplia."</p>
-                    <p class="font-bold text-carbon">- Mariana R.</p>
-                </div>
-                <!-- Testimonio 2 -->
-                <div class="bg-arena p-8 rounded-3xl" data-aos="fade-up" data-aos-delay="100">
-                    <div class="text-yellow-400 text-xl mb-4">
-                        <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
-                    </div>
-                    <p class="text-gray-600 mb-6 italic">"Excelente opción si quieres algo privado solo para tu familia. Que tengan asador y cocina te facilita todo. ¡Sin duda regresaremos!"</p>
-                    <p class="font-bold text-carbon">- Carlos G.</p>
-                </div>
-                <!-- Testimonio 3 -->
-                <div class="bg-arena p-8 rounded-3xl" data-aos="fade-up" data-aos-delay="200">
-                    <div class="text-yellow-400 text-xl mb-4">
-                        <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
-                    </div>
-                    <p class="text-gray-600 mb-6 italic">"Rentamos también el departamento para quedarnos a dormir y fue la mejor decisión. Súper limpio, camas muy cómodas y no tuvimos que manejar de noche."</p>
-                    <p class="font-bold text-carbon">- Familia Valdez</p>
-                </div>
+                <div id="calendar-grid" class="grid grid-cols-7 gap-2 md:gap-4 text-center"></div>
             </div>
         </div>
     </section>
@@ -523,385 +236,103 @@
     <footer class="bg-carbon text-white pt-20 pb-10">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="grid grid-cols-1 md:grid-cols-2 gap-12 mb-16 border-b border-white/10 pb-16">
-                
-                <!-- Logo y Descripción -->
-                <div data-aos="fade-right">
+                <div>
                     <div class="flex items-center gap-3 mb-6">
-                        <div class="w-12 h-12 bg-terracota rounded-full flex items-center justify-center text-white text-xl">
-                            <i class="fa-solid fa-leaf"></i>
-                        </div>
-                        <span class="font-serif font-bold text-3xl tracking-wider">Casa Copal</span>
+                        <div class="w-10 h-10 bg-terracota rounded-full flex items-center justify-center"><i class="fa-solid fa-leaf"></i></div>
+                        <span class="font-serif font-bold text-2xl tracking-wider">Casa Copal</span>
                     </div>
-                    <p class="text-gray-400 leading-relaxed max-w-sm">
-                        Creando memorias inolvidables en un entorno exclusivo, privado y diseñado para la convivencia familiar en Los Cabos.
-                    </p>
+                    <p class="text-gray-400 text-sm max-w-xs">Creando memorias inolvidables en Los Cabos.</p>
                 </div>
-
-                <!-- Info y Mapa -->
-                <div class="flex flex-col justify-between" data-aos="fade-left">
-                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-8 mb-8">
-                        <div>
-                            <div class="w-12 h-12 bg-white/10 rounded-full flex items-center justify-center text-terracota text-xl mb-4"><i class="fa-solid fa-location-dot"></i></div>
-                            <h4 class="font-bold mb-2">Ubicación</h4>
-                            <p class="text-gray-400 text-sm">Colonia Mezquites,<br>Los Cabos, B.C.S.</p>
-                        </div>
-                        <div>
-                            <div class="w-12 h-12 bg-white/10 rounded-full flex items-center justify-center text-terracota text-xl mb-4"><i class="fa-solid fa-envelope"></i></div>
-                            <h4 class="font-bold mb-2">Contacto Directo</h4>
-                            <a href="https://wa.me/526243203289" target="_blank" class="block text-gray-400 text-sm hover:text-white mb-1"><i class="fa-brands fa-whatsapp text-green-400"></i> +52 624 320 3289</a>
-                            
-                            <a href="mailto:info@casacopal.com.mx" class="block text-gray-400 text-sm hover:text-white">info@casacopal.com.mx</a>
-                        </div>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-8">
+                    <div>
+                        <h4 class="font-bold mb-4 text-sm uppercase tracking-widest text-terracota">Ubicación</h4>
+                        <p class="text-gray-400 text-sm">Colonia Mezquites,<br>Los Cabos, B.C.S.</p>
+                    </div>
+                    <div>
+                        <h4 class="font-bold mb-4 text-sm uppercase tracking-widest text-terracota">Contacto</h4>
+                        <a href="https://wa.me/526243203289" target="_blank" class="block text-gray-400 text-sm hover:text-white mb-2 font-bold"><i class="fa-brands fa-whatsapp text-green-400"></i> +52 624 320 3289</a>
+                        <a href="mailto:info@casacopal.com.mx" class="block text-gray-400 text-sm hover:text-white">info@casacopal.com.mx</a>
                     </div>
                 </div>
             </div>
-
-            <div class="flex flex-col md:flex-row justify-between items-center text-gray-500 text-sm">
+            <div class="flex flex-col md:flex-row justify-between items-center text-gray-500 text-xs gap-6">
                 <p>&copy; 2026 Casa Copal. Todos los derechos reservados.</p>
-                <div class="flex space-x-4 mt-4 md:mt-0">
-                    <!-- ENLACES DE REDES SOCIALES ACTUALIZADOS -->
-                    <a href="https://www.facebook.com/casacopalcabos/" target="_blank" class="hover:text-terracota transition-colors"><i class="fa-brands fa-facebook text-xl"></i></a>
-                    <a href="https://instagram.com/casacopalcabos/" target="_blank" class="hover:text-terracota transition-colors"><i class="fa-brands fa-instagram text-xl"></i></a>
+                <div class="flex flex-wrap justify-center gap-6">
+                    <!-- ENLACES DE REDES SOCIALES CON TEXTO -->
+                    <a href="https://www.facebook.com/casacopalcabos/" target="_blank" class="flex items-center gap-2 hover:text-terracota transition-all bg-white/5 px-4 py-2 rounded-full">
+                        <i class="fa-brands fa-facebook text-lg"></i>
+                        <span class="font-bold">@casacopalcabos</span>
+                    </a>
+                    <a href="https://instagram.com/casacopalcabos/" target="_blank" class="flex items-center gap-2 hover:text-terracota transition-all bg-white/5 px-4 py-2 rounded-full">
+                        <i class="fa-brands fa-instagram text-lg"></i>
+                        <span class="font-bold">@casacopalcabos</span>
+                    </a>
                 </div>
             </div>
         </div>
     </footer>
 
-    <!-- Scripts de Interacción -->
+    <!-- Scripts -->
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script type="module">
-        // Importar Módulos de Base de Datos (Firebase)
         import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
-        import { getFirestore, collection, onSnapshot, doc, setDoc } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+        import { getFirestore, collection, onSnapshot } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
 
-        // Inicializar Animaciones
-        AOS.init({ once: true, offset: 100 });
+        AOS.init({ once: true });
 
-        // Navbar Scroll Effect
-        window.addEventListener('scroll', () => {
-            const nav = document.getElementById('navbar');
-            if (window.scrollY > 50) {
-                nav.classList.add('shadow-md');
-                nav.classList.remove('py-2');
-            } else {
-                nav.classList.remove('shadow-md');
-                nav.classList.add('py-2');
-            }
-        });
-
-        // Menú Móvil
-        const btn = document.getElementById('mobile-menu-btn');
-        const menu = document.getElementById('mobile-menu');
-        btn.addEventListener('click', () => {
-            menu.classList.toggle('hidden');
-        });
-        menu.querySelectorAll('a').forEach(link => {
-            link.addEventListener('click', () => menu.classList.add('hidden'));
-        });
-
-        // Galería Filtros y Modal
-        const filterBtns = document.querySelectorAll('.filter-btn');
-        const galleryItems = document.querySelectorAll('.gallery-item');
-        const modal = document.getElementById('image-modal');
-        const modalImg = document.getElementById('modal-img');
-
-        filterBtns.forEach(btn => {
-            btn.addEventListener('click', () => {
-                filterBtns.forEach(b => b.classList.remove('active', 'bg-carbon', 'text-white'));
-                btn.classList.add('active', 'bg-carbon', 'text-white');
-                btn.classList.remove('bg-gray-100', 'text-gray-600');
-
-                const filter = btn.getAttribute('data-filter');
-                galleryItems.forEach(item => {
-                    if (filter === 'all' || item.classList.contains(filter)) {
-                        item.style.display = 'block';
-                        setTimeout(() => item.style.opacity = '1', 10);
-                    } else {
-                        item.style.opacity = '0';
-                        setTimeout(() => item.style.display = 'none', 300);
-                    }
-                });
-            });
-        });
-
-        window.openModal = function(src, isRotated = false) {
-            modalImg.src = src;
-            if(isRotated){
-                modalImg.classList.add('-rotate-90');
-                modalImg.classList.add('max-h-[70vw]'); 
-            } else {
-                modalImg.classList.remove('-rotate-90');
-                modalImg.classList.remove('max-h-[70vw]');
-            }
-            modal.classList.remove('hidden');
-            setTimeout(() => { modal.classList.remove('opacity-0'); }, 10);
-            document.body.style.overflow = 'hidden';
-        }
-
-        window.closeModal = function() {
-            modal.classList.add('opacity-0');
-            setTimeout(() => {
-                modal.classList.add('hidden');
-                document.body.style.overflow = 'auto';
-            }, 300);
-        }
-
-        modal.addEventListener('click', (e) => {
-            if (e.target === modal) window.closeModal();
-        });
-
-
-        // ==========================================
-        // LÓGICA DEL CALENDARIO Y BASE DE DATOS (FIREBASE OFICIAL)
-        // ==========================================
-        
-        // 1. Configuración Real de Casa Copal
+        // Firebase Config
         const firebaseConfig = {
           apiKey: "AIzaSyDSyCBJ3VeLNYgFjo4qo3pysBJPYEfmryQ",
           authDomain: "casa-copal-web.firebaseapp.com",
           projectId: "casa-copal-web",
           storageBucket: "casa-copal-web.firebasestorage.app",
           messagingSenderId: "1066820914348",
-          appId: "1:1066820914348:web:ba00a2fdac45b4f478a309",
-          measurementId: "G-236BZ8XVX6"
+          appId: "1:1066820914348:web:ba00a2fdac45b4f478a309"
         };
-        
-        let app, db;
-        let isDbConnected = false;
-        
-        try {
-            app = initializeApp(firebaseConfig);
-            db = getFirestore(app);
-            isDbConnected = true;
-            console.log("¡Base de Datos de Casa Copal conectada con éxito!");
-        } catch(e) {
-            console.error("Error al conectar Firebase:", e);
-        }
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
 
-        // Variables de Estado del Calendario
+        // Lógica Calendario
         let currentDate = new Date();
-        currentDate.setHours(12, 0, 0, 0); 
-        const today = new Date();
-        today.setHours(0, 0, 0, 0);
-
-        let selectedDateObj = null;
-        let isWeekend = false;
-        let basePrice = 0;
-        let deptoPrice = 0;
         let reservedDates = [];
 
-        // 2. Conexión y Lectura en Vivo desde Firestore
-        if(isDbConnected && db) {
-            const reservacionesRef = collection(db, 'reservaciones');
-            
-            onSnapshot(reservacionesRef, (snapshot) => {
-                reservedDates = [];
-                snapshot.forEach((doc) => {
-                    reservedDates.push(doc.id); 
-                });
-                window.renderCalendar();
-            }, (error) => {
-                console.error("Error al leer datos de la nube:", error);
-            });
-        }
+        onSnapshot(collection(db, 'reservaciones'), (snapshot) => {
+            reservedDates = snapshot.docs.map(doc => doc.id);
+            renderCalendar();
+        });
 
-        function formatDateToYYYYMMDD(dateObj) {
-            const y = dateObj.getFullYear();
-            const m = String(dateObj.getMonth() + 1).padStart(2, '0');
-            const d = String(dateObj.getDate()).padStart(2, '0');
-            return `${y}-${m}-${d}`;
-        }
-
-        // 3. Funciones del Calendario
         window.renderCalendar = function() {
             const grid = document.getElementById('calendar-grid');
-            const monthYearText = document.getElementById('calendar-month-year');
-            
+            const monthText = document.getElementById('calendar-month-year');
             grid.innerHTML = '';
             
             const month = currentDate.getMonth();
             const year = currentDate.getFullYear();
-            
-            const options = { month: 'long', year: 'numeric' };
-            monthYearText.textContent = currentDate.toLocaleDateString('es-MX', options);
+            monthText.textContent = currentDate.toLocaleDateString('es-MX', { month: 'long', year: 'numeric' });
 
             const firstDay = new Date(year, month, 1).getDay();
             const daysInMonth = new Date(year, month + 1, 0).getDate();
 
-            for (let i = 0; i < firstDay; i++) {
-                grid.appendChild(document.createElement('div'));
-            }
+            for (let i = 0; i < firstDay; i++) grid.appendChild(document.createElement('div'));
 
             for (let i = 1; i <= daysInMonth; i++) {
-                const dateObj = new Date(year, month, i);
-                dateObj.setHours(12,0,0,0);
-                const dateStr = formatDateToYYYYMMDD(dateObj); 
-                
+                const dateStr = `${year}-${String(month+1).padStart(2,'0')}-${String(i).padStart(2,'0')}`;
                 const dayDiv = document.createElement('div');
                 dayDiv.textContent = i;
-                dayDiv.className = 'calendar-day w-10 h-10 md:w-12 md:h-12 flex items-center justify-center rounded-full mx-auto text-sm md:text-base font-medium border border-gray-100';
+                dayDiv.className = 'w-10 h-10 flex items-center justify-center rounded-full mx-auto text-sm border border-gray-50';
                 
-                if (dateObj < today) {
-                    dayDiv.classList.add('disabled');
-                } else if (reservedDates.includes(dateStr)) {
-                    dayDiv.classList.add('reserved');
-                } else {
-                    dayDiv.addEventListener('click', () => window.selectDate(dateObj, dayDiv));
-                }
+                if (reservedDates.includes(dateStr)) dayDiv.classList.add('reserved');
+                else dayDiv.classList.add('calendar-day');
 
                 grid.appendChild(dayDiv);
             }
         }
 
-        window.changeMonth = function(step) {
-            currentDate.setMonth(currentDate.getMonth() + step);
-            window.renderCalendar();
-        }
-
-        window.selectDate = function(dateObj, element) {
-            const prevSelected = document.querySelector('.calendar-day.selected');
-            if(prevSelected) prevSelected.classList.remove('selected');
-            
-            element.classList.add('selected');
-            selectedDateObj = dateObj;
-
-            const dayOfWeek = dateObj.getDay();
-            isWeekend = (dayOfWeek === 0 || dayOfWeek === 5 || dayOfWeek === 6);
-            
-            if (isWeekend) {
-                basePrice = 5000;
-                deptoPrice = 2000;
-                document.getElementById('price-type-label').textContent = "Tarifa Fin de Semana (Vie-Dom)";
-            } else {
-                basePrice = 4000;
-                deptoPrice = 1600;
-                document.getElementById('price-type-label').textContent = "Tarifa Entre Semana (Lun-Jue)";
-            }
-
-            const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
-            let dateString = dateObj.toLocaleDateString('es-MX', options);
-            dateString = dateString.charAt(0).toUpperCase() + dateString.slice(1);
-            
-            document.getElementById('selected-date-display').textContent = dateString;
-            document.getElementById('base-price-display').textContent = `$${basePrice.toLocaleString()}`;
-            document.getElementById('depto-price-label').textContent = `+$${deptoPrice.toLocaleString()} MXN`;
-            
-            document.getElementById('depto-toggle').checked = false;
-            window.updateTotal();
-
-            // Limpiar errores previos si los hubiera
-            document.getElementById('error-datos').classList.add('hidden');
-
-            const bModal = document.getElementById('booking-modal');
-            const bModalContent = document.getElementById('booking-modal-content');
-            bModal.classList.remove('hidden');
-            setTimeout(() => {
-                bModal.classList.remove('opacity-0');
-                bModalContent.classList.remove('scale-95');
-            }, 10);
-        }
-
-        window.updateTotal = function() {
-            const deptoSelected = document.getElementById('depto-toggle').checked;
-            let total = basePrice;
-            if (deptoSelected) total += deptoPrice;
-            document.getElementById('total-price-display').textContent = `$${total.toLocaleString()}`;
-        }
-        document.getElementById('depto-toggle').addEventListener('change', window.updateTotal);
-
-        window.closeBookingModal = function() {
-            const bModal = document.getElementById('booking-modal');
-            const bModalContent = document.getElementById('booking-modal-content');
-            bModal.classList.add('opacity-0');
-            bModalContent.classList.add('scale-95');
-            
-            const prevSelected = document.querySelector('.calendar-day.selected');
-            if(prevSelected) prevSelected.classList.remove('selected');
-
-            setTimeout(() => { bModal.classList.add('hidden'); }, 300);
-        }
-
-        // 4. Confirmar Reserva (Base de Datos + WhatsApp como Notificación de Pago)
-        window.confirmarReserva = async function() {
-            if(!selectedDateObj) return;
-
-            // --- NUEVO: Capturar y Validar Datos ---
-            const nombre = document.getElementById('cliente-nombre').value.trim();
-            const telefono = document.getElementById('cliente-telefono').value.trim();
-            const correo = document.getElementById('cliente-correo').value.trim();
-            const msgError = document.getElementById('error-datos');
-
-            if(!nombre || !telefono || !correo) {
-                msgError.classList.remove('hidden'); 
-                return; 
-            } else {
-                msgError.classList.add('hidden'); 
-            }
-
-            const btn = document.getElementById('btn-confirmar');
-            btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin text-xl"></i> Procesando...';
-            btn.disabled = true;
-
-            const dateStr = formatDateToYYYYMMDD(selectedDateObj);
-            const deptoSelected = document.getElementById('depto-toggle').checked;
-            const total = basePrice + (deptoSelected ? deptoPrice : 0);
-            
-            if(isDbConnected && db) {
-                try {
-                    const docRef = doc(db, 'reservaciones', dateStr);
-                    await setDoc(docRef, {
-                        status: 'apartado_esperando_pago',
-                        precio_total: total,
-                        depto_incluido: deptoSelected,
-                        cliente_nombre: nombre,     
-                        cliente_telefono: telefono, 
-                        cliente_correo: correo,     
-                        timestamp: new Date().toISOString()
-                    });
-                } catch(e) { 
-                    console.error("Error guardando reserva en la nube:", e); 
-                }
-            }
-
-            if(!reservedDates.includes(dateStr)) {
-                reservedDates.push(dateStr);
-                window.renderCalendar();
-            }
-
-            btn.classList.remove('bg-carbon');
-            btn.classList.add('bg-[#25D366]');
-            btn.innerHTML = '<i class="fa-brands fa-whatsapp text-xl"></i> Redirigiendo a WhatsApp...';
-
-            const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
-            const fechaTxt = selectedDateObj.toLocaleDateString('es-MX', options);
-
-            let mensaje = `¡Hola! 🌿 Soy ${nombre}, acabo de apartar mi fecha en la página web oficial.\n\n`;
-            mensaje += `🗓️ *Fecha Reservada:* ${fechaTxt}\n`;
-            mensaje += `🏠 *Salón:* $${basePrice.toLocaleString()}\n`;
-            if(deptoSelected) {
-                mensaje += `🛏️ *Departamento:* $${deptoPrice.toLocaleString()}\n`;
-            }
-            mensaje += `💵 *Total a Pagar:* $${total.toLocaleString()}\n\n`;
-            mensaje += `Quedo en espera del número de cuenta para realizar la transferencia del anticipo. Mi correo es ${correo}. ¡Gracias!`;
-
-            const url = `https://wa.me/526243203289?text=${encodeURIComponent(mensaje)}`;
-            
-            setTimeout(() => {
-                window.open(url, '_blank'); 
-                window.closeBookingModal();
-                
-                btn.disabled = false;
-                btn.innerHTML = 'Confirmar Reserva';
-                btn.classList.remove('bg-[#25D366]');
-                btn.classList.add('bg-carbon');
-                document.getElementById('cliente-nombre').value = '';
-                document.getElementById('cliente-telefono').value = '';
-                document.getElementById('cliente-correo').value = '';
-            }, 1500);
-        }
-
-        window.renderCalendar();
-
+        window.changeMonth = (step) => { currentDate.setMonth(currentDate.getMonth() + step); renderCalendar(); }
+        window.openModal = (src) => { document.getElementById('modal-img').src = src; document.getElementById('image-modal').classList.remove('hidden'); setTimeout(() => document.getElementById('image-modal').classList.remove('opacity-0'), 10); }
+        window.closeModal = () => { document.getElementById('image-modal').classList.add('opacity-0'); setTimeout(() => document.getElementById('image-modal').classList.add('hidden'), 300); }
+        
+        renderCalendar();
     </script>
 </body>
 </html>
