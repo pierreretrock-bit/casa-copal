@@ -330,7 +330,7 @@
                 if(loader) loader.classList.add('hidden');
                 
                 renderRifaGrid();
-                if (document.getElementById('rifa-admin-panel-modal').classList.contains('opacity-100')) {
+                if (!document.getElementById('rifa-admin-panel-modal').classList.contains('hidden')) {
                     renderAdminPanel();
                 }
             }, (error) => {
@@ -501,13 +501,17 @@
                 tr.className = "border-b border-gray-100 hover:bg-gray-50 transition-colors";
                 const statusBadge = t.status === 'pagado' ? 'bg-green-100 text-green-700 font-bold' : 'bg-yellow-100 text-yellow-700 font-bold';
                 
+                // Formatear teléfono para WhatsApp México
+                let phoneNum = t.buyerPhone.replace(/\D/g, '');
+                if (phoneNum.length === 10) phoneNum = '52' + phoneNum;
+
                 tr.innerHTML = `
                     <td class="p-4"><div class="w-10 h-10 bg-gray-100 rounded-lg flex items-center justify-center font-black">#${t.number}</div></td>
                     <td class="p-4 font-bold text-carbon">${t.buyerName}</td>
                     <td class="p-4 text-gray-500 text-sm">${t.buyerPhone}</td>
                     <td class="p-4"><span class="px-3 py-1.5 rounded-full text-[10px] font-black uppercase ${statusBadge}">${t.status}</span></td>
                     <td class="p-4 flex justify-end gap-2">
-                        <a href="https://wa.me/${t.buyerPhone.replace(/\D/g, '')}" target="_blank" class="w-10 h-10 flex items-center justify-center border border-gray-200 rounded-xl hover:text-blue-500"><i class="fa-brands fa-whatsapp"></i></a>
+                        <a href="https://wa.me/${phoneNum}?text=${encodeURIComponent('Hola ' + t.buyerName + ', te escribo sobre tu boleto #' + t.number + ' para la rifa de Melissa.')}" target="_blank" class="w-10 h-10 flex items-center justify-center border border-gray-200 rounded-xl hover:text-blue-500"><i class="fa-brands fa-whatsapp"></i></a>
                         ${t.status === 'apartado' ? `<button onclick="window.confirmarPagoRifa(${t.number})" class="w-10 h-10 flex items-center justify-center border border-gray-200 rounded-xl hover:text-green-500"><i class="fa-solid fa-check"></i></button>` : ''}
                         <button onclick="window.liberarBoletoRifa(${t.number})" class="w-10 h-10 flex items-center justify-center border border-gray-200 rounded-xl hover:text-rose-500"><i class="fa-solid fa-trash"></i></button>
                     </td>
@@ -518,15 +522,25 @@
 
         window.confirmarPagoRifa = async (num) => {
             if (!currentUser) return;
-            const docRef = getDocPath(num.toString());
-            await updateDoc(docRef, { status: 'pagado' });
+            try {
+                const docRef = getDocPath(num.toString());
+                await updateDoc(docRef, { status: 'pagado' });
+            } catch (err) {
+                console.error(err);
+                alert("Error al confirmar el pago.");
+            }
         };
 
         window.liberarBoletoRifa = async (num) => {
             if (!currentUser) return;
             if(confirm(`¿Cancelar boleto #${num}?`)) {
-                const docRef = getDocPath(num.toString());
-                await deleteDoc(docRef);
+                try {
+                    const docRef = getDocPath(num.toString());
+                    await deleteDoc(docRef);
+                } catch (err) {
+                    console.error(err);
+                    alert("Error al liberar boleto.");
+                }
             }
         };
 
