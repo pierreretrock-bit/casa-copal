@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rifa con Causa | Casa Copal Eventos</title>
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Apoya a Melissa en esta rifa con causa. Casa Copal ha donado 1 día de Salón de Eventos.">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+    
+    <!-- AOS Animation Library -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        terracota: '#D97757',
+                        terracotaDark: '#B85E40',
+                        arena: '#F4F1EB',
+                        carbon: '#2C3E50',
+                        oliva: '#7A8B76'
+                    },
+                    fontFamily: {
+                        serif: ['Playfair Display', 'serif'],
+                        sans: ['Lato', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-[#F8FAFC] text-carbon font-sans antialiased text-[15px]">
+
+    <!-- NAVBAR SIMPLE -->
+    <nav class="w-full bg-white shadow-sm border-b border-gray-100 py-4 relative z-50">
+        <div class="max-w-4xl mx-auto px-4 flex justify-between items-center">
+            <a href="https://www.casacopal.com.mx" target="_blank" class="flex items-center gap-3">
+                <div class="w-10 h-10 bg-terracota rounded-full flex items-center justify-center text-white">
+                    <i class="fa-solid fa-leaf"></i>
+                </div>
+                <span class="font-serif font-bold text-xl tracking-wider text-carbon hidden sm:block">Casa Copal</span>
+            </a>
+            <a href="https://www.casacopal.com.mx" target="_blank" class="text-sm font-bold text-gray-500 hover:text-terracota transition-colors flex items-center gap-2">
+                <i class="fa-solid fa-arrow-left"></i> Volver al sitio oficial
+            </a>
+        </div>
+    </nav>
+
+    <!-- CONTENIDO PRINCIPAL DE LA RIFA -->
+    <main class="py-12">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            
+            <!-- Header Rifa -->
+            <div class="bg-white text-carbon p-6 md:p-10 shadow-sm rounded-3xl mb-8 border border-gray-100" data-aos="fade-down">
+                <div class="flex flex-col md:flex-row items-center justify-between gap-8">
+                    <div class="flex flex-col items-center md:items-start text-center md:text-left flex-1">
+                        <div class="flex items-center gap-2 mb-3 text-terracota">
+                            <span class="text-sm tracking-widest font-bold text-gray-500 uppercase">Iniciativa Solidaria</span>
+                        </div>
+                        <h1 class="text-4xl md:text-5xl font-serif font-bold flex flex-wrap justify-center md:justify-start items-center gap-3 text-carbon mb-4">
+                            Rifa con Causa <i class="fa-solid fa-heart text-rose-500 animate-pulse"></i> Melissa
+                        </h1>
+                        <p class="text-gray-600 text-lg leading-relaxed">
+                            En <strong class="text-terracota">Casa Copal</strong> nos unimos a esta causa donando <strong>1 día completo de renta de nuestro Salón de Eventos</strong>. Todo lo recaudado será para ayudar a Melissa a adquirir un respirador vital. ¡Tu apoyo hace la diferencia!
+                        </p>
+                    </div>
+                    <div class="bg-arena border border-gray-200 p-8 rounded-2xl text-center shadow-md w-full md:w-auto shrink-0 relative overflow-hidden">
+                        <div class="absolute top-0 right-0 w-16 h-16 bg-terracota/10 rounded-bl-full"></div>
+                        <span class="block text-xs text-gray-500 uppercase tracking-widest font-bold mb-2">Premio Mayor</span>
+                        <i class="fa-solid fa-gift text-terracota text-3xl mb-2"></i>
+                        <span class="block text-3xl font-bold text-carbon mb-4">1 Día de Salón</span>
+                        <span class="block text-lg text-white bg-carbon py-2 px-6 rounded-full font-bold inline-block shadow-lg">Costo: $200 MXN</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Progreso y Datos de Cuenta -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10" data-aos="fade-up">
+                <!-- Progreso -->
+                <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 col-span-1 flex flex-col justify-center text-center sm:text-left">
+                    <div class="flex justify-between text-sm font-bold text-gray-600 mb-3">
+                        <span id="rifa-recaudado" class="text-terracota text-lg">Cargando...</span>
+                        <span>Meta: 100</span>
+                    </div>
+                    <div class="w-full bg-gray-100 rounded-full h-4 overflow-hidden mb-3">
+                        <div id="rifa-progress" class="bg-oliva h-4 transition-all duration-1000 ease-out relative" style="width: 0%">
+                            <div class="absolute inset-0 bg-white/20 animate-[pulse_2s_ease-in-out_infinite]"></div>
+                        </div>
+                    </div>
+                    <p id="rifa-restantes" class="text-center text-sm text-gray-500 font-bold bg-gray-50 py-1 rounded-md">-- boletos restantes</p>
+                </div>
+                
+                <!-- Datos Bancarios -->
+                <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 col-span-1 md:col-span-2 flex items-center gap-5">
+                    <div class="bg-arena p-5 rounded-full text-terracota hidden sm:flex shrink-0">
+                        <i class="fa-solid fa-credit-card text-3xl"></i>
+                    </div>
+                    <div class="flex-1">
+                        <h3 class="font-bold text-carbon mb-2 text-lg">Pasos para participar:</h3>
+                        <ol class="text-sm text-gray-600 mb-4 list-decimal list-inside space-y-1">
+                            <li>Elige tu número en la cuadrícula de abajo.</li>
+                            <li>Realiza tu pago de <strong>$200 MXN</strong> a la cuenta indicada.</li>
+                            <li>El sistema te generará un <strong>Boleto Virtual</strong> para que nos lo envíes por WhatsApp.</li>
+                        </ol>
+                        <div class="bg-arena p-4 rounded-xl border border-gray-200 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+                            <div>
+                                <p class="text-[10px] text-gray-500 uppercase font-bold tracking-wider">Banco</p>
+                                <p class="text-sm font-bold text-carbon"><i class="fa-solid fa-building-columns text-terracota mr-1"></i> BBVA Bancomer</p>
+                                <p class="text-[10px] text-gray-500 uppercase font-bold tracking-wider mt-2">A nombre de</p>
+                                <p class="text-sm font-bold text-carbon"><i class="fa-solid fa-user text-terracota mr-1"></i> Sergio Vizcarra</p>
+                            </div>
+                            <div class="bg-white px-4 py-3 rounded-lg border border-gray-100 shadow-sm w-full sm:w-auto text-left sm:text-right overflow-hidden">
+                                <p class="text-[10px] text-gray-400 uppercase font-bold tracking-wider mb-1">Número de Tarjeta</p>
+                                <p class="font-mono font-black text-carbon tracking-wider text-sm sm:text-base whitespace-nowrap uppercase">4152 3143 2164 5767</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Cuadrícula -->
+            <div id="grid-container" class="bg-white p-6 md:p-10 rounded-3xl shadow-sm border border-gray-100 relative overflow-hidden min-h-[400px]" data-aos="fade-up" data-aos-delay="100">
+                <div id="grid-loading" class="absolute inset-0 bg-white/80 backdrop-blur-sm z-20 flex flex-col items-center justify-center gap-4">
+                     <i class="fa-solid fa-circle-notch fa-spin text-4xl text-terracota"></i>
+                     <p class="font-bold text-gray-500">Sincronizando números...</p>
+                </div>
+                
+                <div class="absolute -right-20 -top-20 w-64 h-64 bg-terracota/5 rounded-full blur-3xl pointer-events-none"></div>
+                
+                <h2 class="text-2xl font-bold text-carbon mb-8 flex items-center justify-center gap-3">
+                    <i class="fa-solid fa-ticket text-terracota"></i> Elige tu número de la suerte
+                </h2>
+                
+                <div id="rifa-grid" class="grid grid-cols-5 md:grid-cols-10 gap-2 md:gap-4 relative z-10">
+                    <!-- Botones generados por JS -->
+                </div>
+                
+                <div class="mt-12 flex justify-center border-t border-gray-100 pt-6">
+                    <button onclick="window.openAdminAuth()" class="text-xs text-gray-400 hover:text-gray-600 flex items-center gap-1 transition-colors font-bold bg-gray-50 px-4 py-2 rounded-full border border-gray-200">
+                        <i class="fa-solid fa-shield-halved"></i> Acceso Admin
+                    </button>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <footer class="bg-carbon text-white py-8 text-center text-sm border-t border-white/10 mt-10">
+        <p class="text-gray-400">&copy; 2026 Casa Copal Eventos. Todos unidos por Melissa.</p>
+    </footer>
+
+    <!-- MODALES -->
+    <div id="rifa-purchase-modal" class="fixed inset-0 z-[100] hidden bg-black/60 backdrop-blur-sm flex items-center justify-center opacity-0 transition-opacity duration-300 px-4">
+        <div class="bg-white rounded-3xl shadow-2xl max-w-md w-full overflow-hidden transform transition-all">
+            <div class="bg-carbon p-5 flex justify-between items-center text-white">
+                <h3 class="font-bold text-lg font-serif tracking-wide">Adquirir Boleto #<span id="rifa-selected-num" class="text-terracota font-black text-2xl"></span></h3>
+                <button onclick="window.closeRifaPurchase()" class="hover:text-terracota transition-colors bg-white/10 w-8 h-8 rounded-full flex items-center justify-center">
+                    <i class="fa-solid fa-xmark text-lg"></i>
+                </button>
+            </div>
+            <form id="rifa-form" onsubmit="window.submitRifaPurchase(event)" class="p-6 md:p-8">
+                <div class="mb-6 bg-arena text-carbon p-4 rounded-xl flex gap-3 text-sm border border-gray-200 shadow-inner">
+                    <i class="fa-solid fa-circle-info mt-0.5 text-terracota text-lg"></i>
+                    <p>Estás apartando tu número. Asegúrate de tener listo tu comprobante de pago por <strong>$200 MXN</strong>.</p>
+                </div>
+                <div class="space-y-5">
+                    <div>
+                        <label class="block text-sm font-bold text-carbon mb-2">Tu Nombre Completo</label>
+                        <input type="text" id="rifa-buyer-name" required class="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3.5 focus:ring-2 focus:ring-terracota focus:bg-white outline-none transition-all">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-bold text-carbon mb-2">WhatsApp de Contacto</label>
+                        <input type="tel" id="rifa-buyer-phone" required class="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3.5 focus:ring-2 focus:ring-terracota focus:bg-white outline-none transition-all">
+                    </div>
+                </div>
+                <div class="mt-8 flex gap-4">
+                    <button type="button" onclick="window.closeRifaPurchase()" class="w-1/3 px-4 py-3.5 border border-gray-200 text-gray-600 font-bold rounded-xl hover:bg-gray-50 transition-colors">Cancelar</button>
+                    <button type="submit" id="btn-submit-purchase" class="w-2/3 px-4 py-3.5 bg-terracota text-white font-bold rounded-xl hover:bg-terracotaDark shadow-lg transition-all active:scale-95 flex items-center justify-center gap-2">
+                        Apartar Boleto <i class="fa-solid fa-arrow-right"></i>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div id="rifa-ticket-modal" class="fixed inset-0 z-[100] hidden bg-carbon/90 backdrop-blur-md flex items-center justify-center opacity-0 transition-opacity duration-300 px-4">
+        <div class="bg-white rounded-[2rem] w-full max-w-sm relative text-center p-8 shadow-2xl">
+            <button onclick="window.closeRifaTicket()" class="absolute top-4 right-4 text-gray-400 hover:text-carbon bg-gray-100 w-8 h-8 rounded-full flex items-center justify-center"><i class="fa-solid fa-xmark text-lg"></i></button>
+            <div class="mx-auto w-20 h-20 bg-green-50 text-green-500 rounded-full flex items-center justify-center mb-4 shadow-inner"><i class="fa-solid fa-circle-check text-5xl"></i></div>
+            <h2 class="text-2xl font-serif font-bold text-carbon mb-1">¡Boleto Apartado!</h2>
+            <p class="text-gray-500 mb-6 text-sm">Toma captura de pantalla de tu boleto.</p>
+            <div class="bg-[#1e293b] text-white border-2 border-dashed border-terracota rounded-2xl p-6 relative shadow-xl">
+                <div class="absolute top-1/2 -left-4 w-8 h-8 bg-white rounded-full transform -translate-y-1/2"></div>
+                <div class="absolute top-1/2 -right-4 w-8 h-8 bg-white rounded-full transform -translate-y-1/2"></div>
+                <div class="flex justify-center mb-2"><div class="w-8 h-8 rounded-full bg-terracota flex items-center justify-center text-white"><i class="fa-solid fa-leaf text-xs"></i></div></div>
+                <p class="text-xs font-bold text-white uppercase tracking-widest mb-1">Casa Copal Eventos</p>
+                <p class="text-[10px] text-terracota uppercase tracking-widest mb-2 font-bold bg-terracota/10 py-1 px-2 rounded inline-block">Rifa con Causa</p>
+                <p id="vt-number" class="text-7xl font-black text-white my-4 drop-shadow-lg">#--</p>
+                <div class="border-t border-gray-600 pt-4 mt-4 text-left bg-black/20 p-4 rounded-xl">
+                    <p class="text-[10px] text-gray-400 uppercase tracking-widest font-bold">Titular:</p>
+                    <p id="vt-name" class="font-bold text-terracota text-xl truncate mt-1">---</p>
+                    <p id="vt-phone" class="text-xs text-gray-300 mt-1"><i class="fa-solid fa-phone text-[10px] mr-1"></i> ---</p>
+                </div>
+            </div>
+            <a id="vt-wa-btn" href="#" target="_blank" class="mt-8 flex items-center justify-center gap-2 w-full bg-[#25D366] text-white font-bold py-4 rounded-xl hover:bg-[#128C7E] transition-colors shadow-lg hover:-translate-y-1"><i class="fa-brands fa-whatsapp text-2xl"></i> Enviar Comprobante</a>
+            <button onclick="window.closeRifaTicket()" class="mt-4 text-gray-500 text-sm font-bold hover:text-carbon transition-colors">Cerrar ventana</button>
+        </div>
+    </div>
+
+    <div id="rifa-admin-auth-modal" class="fixed inset-0 z-[100] hidden bg-carbon/90 backdrop-blur-sm flex items-center justify-center opacity-0 transition-opacity duration-300 px-4">
+        <div class="bg-white rounded-3xl shadow-2xl max-w-sm w-full overflow-hidden text-center">
+            <div class="bg-carbon p-6 text-white relative">
+                <button onclick="window.closeAdminAuth()" class="absolute top-4 right-4 hover:text-terracota"><i class="fa-solid fa-xmark text-xl"></i></button>
+                <div class="mx-auto w-12 h-12 bg-white/10 rounded-full flex items-center justify-center mb-3"><i class="fa-solid fa-lock text-terracota text-2xl"></i></div>
+                <h3 class="font-bold text-2xl font-serif">Área Restringida</h3>
+            </div>
+            <form onsubmit="window.submitAdminAuth(event)" class="p-8">
+                <input type="password" id="rifa-admin-pass" required class="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-4 focus:ring-2 focus:ring-terracota outline-none text-center tracking-[0.5em] text-xl font-black">
+                <p id="rifa-admin-error" class="text-rose-500 text-sm mt-2 hidden">Contraseña incorrecta.</p>
+                <button type="submit" class="w-full py-4 bg-terracota text-white font-bold rounded-xl mt-6 shadow-lg">Ingresar</button>
+            </form>
+        </div>
+    </div>
+
+    <div id="rifa-admin-panel-modal" class="fixed inset-0 z-[100] hidden bg-gray-100 overflow-y-auto opacity-0 transition-opacity duration-300">
+        <div class="max-w-6xl mx-auto p-4 md:p-8">
+            <div class="flex flex-col sm:flex-row justify-between items-center gap-4 mb-8 bg-white p-6 rounded-2xl shadow-sm border border-gray-200">
+                <h1 class="text-2xl font-bold flex items-center gap-3 text-carbon font-serif"><i class="fa-solid fa-chart-line text-terracota"></i> Panel Rifa Melissa</h1>
+                <button onclick="window.closeAdminPanel()" class="px-5 py-3 bg-carbon text-white font-bold rounded-xl hover:bg-gray-800 transition-colors w-full sm:w-auto">Salir del Panel</button>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+                <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 border-r-4 border-oliva">
+                    <p class="text-xs text-gray-500 uppercase font-bold">Dinero Confirmado</p>
+                    <p id="admin-stat-recaudado" class="text-4xl font-black text-carbon">$0</p>
+                </div>
+                <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 border-r-4 border-yellow-500">
+                    <p class="text-xs text-gray-500 uppercase font-bold">Por Cobrar</p>
+                    <p class="text-4xl font-black text-carbon"><span id="admin-stat-porcobrar">0</span> <span class="text-sm font-normal text-gray-400">boletos</span></p>
+                </div>
+                <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 border-r-4 border-gray-300">
+                    <p class="text-xs text-gray-500 uppercase font-bold">Disponibles</p>
+                    <p class="text-4xl font-black text-carbon"><span id="admin-stat-disponibles">--</span> <span class="text-sm font-normal text-gray-400">boletos</span></p>
+                </div>
+            </div>
+            <div class="bg-white rounded-2xl shadow-sm overflow-hidden border border-gray-200">
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left border-collapse">
+                        <thead><tr class="text-gray-400 text-xs uppercase tracking-widest border-b border-gray-100"><th class="p-4 font-bold">Número</th><th class="p-4 font-bold">Comprador</th><th class="p-4 font-bold">Teléfono</th><th class="p-4 font-bold">Estado</th><th class="p-4 font-bold text-right">Acciones</th></tr></thead>
+                        <tbody id="rifa-admin-tbody"></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts de Lógica y Firebase -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
+        import { getFirestore, collection, onSnapshot, doc, setDoc, deleteDoc, updateDoc } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+        import { getAuth, signInAnonymously, signInWithCustomToken, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+
+        AOS.init({ once: true, offset: 50 });
+
+        // CONFIGURACIÓN DE FIREBASE
+        const firebaseConfig = typeof __firebase_config !== 'undefined' ? JSON.parse(__firebase_config) : {
+          apiKey: "AIzaSyDSyCBJ3VeLNYgFjo4qo3pysBJPYEfmryQ",
+          authDomain: "casa-copal-web.firebaseapp.com",
+          projectId: "casa-copal-web",
+          storageBucket: "casa-copal-web.firebasestorage.app",
+          messagingSenderId: "1066820914348",
+          appId: "1:1066820914348:web:ba00a2fdac45b4f478a309",
+          measurementId: "G-236BZ8XVX6"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+        const auth = getAuth(app);
+        const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
+        
+        // RUTA ESTRICTA SEGÚN REGLA 1
+        const rifaCollectionPath = collection(db, 'artifacts', appId, 'public', 'data', 'rifa_melissa');
+
+        let rifaTickets = Array.from({length: 100}, (_, i) => ({
+            number: i + 1,
+            status: 'disponible',
+            buyerName: '',
+            buyerPhone: ''
+        }));
+
+        let selectedRifaNumber = null;
+        let currentUser = null;
+
+        // --- REGLA 3: AUTH ANTES DE QUERIES ---
+        const initApp = async () => {
+            try {
+                if (typeof __initial_auth_token !== 'undefined' && __initial_auth_token) {
+                    await signInWithCustomToken(auth, __initial_auth_token);
+                } else {
+                    await signInAnonymously(auth);
+                }
+            } catch (error) {
+                console.error("Error de autenticación:", error);
+            }
+        };
+
+        onAuthStateChanged(auth, (user) => {
+            currentUser = user;
+            if (user) {
+                startRealtimeSync();
+            }
+        });
+
+        const startRealtimeSync = () => {
+            if (!currentUser) return;
+
+            onSnapshot(rifaCollectionPath, (snapshot) => {
+                // Resetear boletos a disponible antes de aplicar los datos de la DB
+                rifaTickets = Array.from({length: 100}, (_, i) => ({
+                    number: i + 1, status: 'disponible', buyerName: '', buyerPhone: ''
+                }));
+
+                snapshot.forEach((doc) => {
+                    const data = doc.data();
+                    const num = data.number;
+                    const index = rifaTickets.findIndex(t => t.number === num);
+                    if (index !== -1) {
+                        rifaTickets[index] = { ...rifaTickets[index], ...data };
+                    }
+                });
+
+                document.getElementById('grid-loading').classList.add('hidden');
+                renderRifaGrid();
+                if (document.getElementById('rifa-admin-panel-modal').classList.contains('opacity-100')) {
+                    renderAdminPanel();
+                }
+            }, (error) => {
+                console.error("Error en el snapshot listener:", error);
+            });
+        };
+
+        window.renderRifaGrid = function() {
+            const grid = document.getElementById('rifa-grid');
+            if(!grid) return;
+            grid.innerHTML = '';
+            
+            let ocupados = 0;
+
+            rifaTickets.forEach(t => {
+                if (t.status !== 'disponible') ocupados++;
+
+                const btn = document.createElement('button');
+                btn.className = `relative aspect-square flex flex-col items-center justify-center rounded-2xl text-xl font-black transition-all duration-300 shadow-sm border-2 `;
+
+                if (t.status === 'pagado') {
+                    btn.className += 'bg-gray-100 text-gray-300 cursor-not-allowed border-gray-100 shadow-none';
+                } else if (t.status === 'apartado') {
+                    btn.className += 'bg-yellow-50 text-yellow-500 cursor-not-allowed border-yellow-200';
+                } else {
+                    btn.className += 'bg-white text-carbon border-gray-200 hover:bg-terracota hover:border-terracota hover:text-white cursor-pointer hover:-translate-y-1 hover:shadow-md';
+                    btn.onclick = () => window.openRifaPurchase(t.number);
+                }
+
+                btn.innerHTML = `${t.number}${t.status !== 'disponible' ? `<span class="absolute bottom-1.5 text-[8px] uppercase font-black opacity-80 tracking-widest">${t.status}</span>` : ''}`;
+                grid.appendChild(btn);
+            });
+
+            document.getElementById('rifa-recaudado').innerText = `Apartados: ${ocupados}`;
+            document.getElementById('rifa-restantes').innerText = `${100 - ocupados} boletos restantes`;
+            document.getElementById('rifa-progress').style.width = `${ocupados}%`;
+            document.getElementById('admin-stat-disponibles').innerText = 100 - ocupados;
+        };
+
+        window.openRifaPurchase = function(num) {
+            selectedRifaNumber = num;
+            document.getElementById('rifa-selected-num').innerText = num;
+            document.getElementById('rifa-buyer-name').value = '';
+            document.getElementById('rifa-buyer-phone').value = '';
+            const modal = document.getElementById('rifa-purchase-modal');
+            modal.classList.remove('hidden');
+            setTimeout(() => modal.classList.remove('opacity-0'), 10);
+            document.body.style.overflow = 'hidden';
+        };
+
+        window.closeRifaPurchase = function() {
+            const modal = document.getElementById('rifa-purchase-modal');
+            modal.classList.add('opacity-0');
+            setTimeout(() => { modal.classList.add('hidden'); document.body.style.overflow = 'auto'; }, 300);
+        };
+
+        window.submitRifaPurchase = async function(e) {
+            e.preventDefault();
+            if (!currentUser) {
+                alert("Esperando conexión segura con el servidor...");
+                return;
+            }
+            const name = document.getElementById('rifa-buyer-name').value.trim();
+            const phone = document.getElementById('rifa-buyer-phone').value.trim();
+            const btn = document.getElementById('btn-submit-purchase');
+
+            if(!name || !phone) return;
+
+            btn.disabled = true;
+            btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin mr-2"></i> Guardando...';
+
+            try {
+                // GUARDAR EN FIREBASE USANDO RUTA ESTRICTA
+                const ticketDocRef = doc(db, 'artifacts', appId, 'public', 'data', 'rifa_melissa', selectedRifaNumber.toString());
+                await setDoc(ticketDocRef, {
+                    number: selectedRifaNumber,
+                    status: 'apartado',
+                    buyerName: name,
+                    buyerPhone: phone,
+                    timestamp: new Date().toISOString()
+                });
+
+                closeRifaPurchase();
+
+                document.getElementById('vt-number').innerText = `#${selectedRifaNumber}`;
+                document.getElementById('vt-name').innerText = name;
+                document.getElementById('vt-phone').innerHTML = `<i class="fa-solid fa-phone text-[10px] mr-1 text-gray-500"></i> ${phone}`;
+
+                const msg = `Hola, acabo de apartar el boleto #${selectedRifaNumber} a nombre de ${name}. Aquí te envío mi comprobante de pago de la rifa de Melissa.`;
+                document.getElementById('vt-wa-btn').href = `https://wa.me/526243203289?text=${encodeURIComponent(msg)}`;
+
+                const vtModal = document.getElementById('rifa-ticket-modal');
+                vtModal.classList.remove('hidden');
+                setTimeout(() => vtModal.classList.remove('opacity-0'), 10);
+            } catch (error) {
+                console.error("Error al guardar:", error);
+                alert("Hubo un error de permisos o conexión. Por favor contacta al administrador.");
+            } finally {
+                btn.disabled = false;
+                btn.innerHTML = 'Apartar Boleto <i class="fa-solid fa-arrow-right"></i>';
+            }
+        };
+
+        window.closeRifaTicket = function() {
+            const vtModal = document.getElementById('rifa-ticket-modal');
+            vtModal.classList.add('opacity-0');
+            setTimeout(() => { vtModal.classList.add('hidden'); document.body.style.overflow = 'auto'; }, 300);
+            selectedRifaNumber = null;
+        };
+
+        window.openAdminAuth = function() {
+            document.getElementById('rifa-admin-pass').value = '';
+            document.getElementById('rifa-admin-error').classList.add('hidden');
+            const modal = document.getElementById('rifa-admin-auth-modal');
+            modal.classList.remove('hidden');
+            setTimeout(() => modal.classList.remove('opacity-0'), 10);
+            document.body.style.overflow = 'hidden';
+        };
+
+        window.closeAdminAuth = function() {
+            const modal = document.getElementById('rifa-admin-auth-modal');
+            modal.classList.add('opacity-0');
+            setTimeout(() => { modal.classList.add('hidden'); document.body.style.overflow = 'auto'; }, 300);
+        };
+
+        window.submitAdminAuth = function(e) {
+            e.preventDefault();
+            if(document.getElementById('rifa-admin-pass').value === 'admin123') { 
+                closeAdminAuth();
+                window.renderAdminPanel();
+                const modal = document.getElementById('rifa-admin-panel-modal');
+                modal.classList.remove('hidden');
+                setTimeout(() => modal.classList.remove('opacity-0'), 10);
+                document.body.style.overflow = 'hidden'; 
+            } else {
+                document.getElementById('rifa-admin-error').classList.remove('hidden');
+            }
+        };
+
+        window.closeAdminPanel = function() {
+            const modal = document.getElementById('rifa-admin-panel-modal');
+            modal.classList.add('opacity-0');
+            setTimeout(() => { modal.classList.add('hidden'); document.body.style.overflow = 'auto'; }, 300);
+        };
+
+        window.renderAdminPanel = function() {
+            const tbody = document.getElementById('rifa-admin-tbody');
+            tbody.innerHTML = '';
+            const ocupados = rifaTickets.filter(t => t.status !== 'disponible');
+
+            let recaudado = rifaTickets.filter(t => t.status === 'pagado').length * 200;
+            let porCobrar = rifaTickets.filter(t => t.status === 'apartado').length;
+            document.getElementById('admin-stat-recaudado').innerText = `$${recaudado.toLocaleString()}`;
+            document.getElementById('admin-stat-porcobrar').innerText = porCobrar;
+
+            if(ocupados.length === 0) {
+                tbody.innerHTML = '<tr><td colspan="5" class="p-10 text-center text-gray-400 font-medium">Nadie ha apartado boletos aún.</td></tr>';
+                return;
+            }
+
+            ocupados.sort((a,b) => a.number - b.number);
+
+            ocupados.forEach(t => {
+                const tr = document.createElement('tr');
+                tr.className = "border-b border-gray-100 hover:bg-gray-50 transition-colors";
+                const statusBadge = t.status === 'pagado' ? 'bg-green-100 text-green-700 font-bold' : 'bg-yellow-100 text-yellow-700 font-bold';
+                
+                tr.innerHTML = `
+                    <td class="p-4"><div class="w-10 h-10 bg-gray-100 rounded-lg flex items-center justify-center font-black">#${t.number}</div></td>
+                    <td class="p-4 font-bold text-carbon">${t.buyerName}</td>
+                    <td class="p-4 text-gray-500 text-sm">${t.buyerPhone}</td>
+                    <td class="p-4"><span class="px-3 py-1.5 rounded-full text-[10px] font-black uppercase ${statusBadge}">${t.status}</span></td>
+                    <td class="p-4 flex justify-end gap-2">
+                        <a href="https://wa.me/${t.buyerPhone.replace(/\D/g, '')}" target="_blank" class="w-10 h-10 flex items-center justify-center border border-gray-200 rounded-xl hover:text-blue-500"><i class="fa-brands fa-whatsapp"></i></a>
+                        ${t.status === 'apartado' ? `<button onclick="window.confirmarPagoRifa(${t.number})" class="w-10 h-10 flex items-center justify-center border border-gray-200 rounded-xl hover:text-green-500"><i class="fa-solid fa-check"></i></button>` : ''}
+                        <button onclick="window.liberarBoletoRifa(${t.number})" class="w-10 h-10 flex items-center justify-center border border-gray-200 rounded-xl hover:text-rose-500"><i class="fa-solid fa-trash"></i></button>
+                    </td>
+                `;
+                tbody.appendChild(tr);
+            });
+        };
+
+        window.confirmarPagoRifa = async function(num) {
+            if (!currentUser) return;
+            const docRef = doc(db, 'artifacts', appId, 'public', 'data', 'rifa_melissa', num.toString());
+            await updateDoc(docRef, { status: 'pagado' });
+        };
+
+        window.liberarBoletoRifa = async function(num) {
+            if (!currentUser) return;
+            if(confirm(`¿Cancelar boleto #${num}?`)) {
+                const docRef = doc(db, 'artifacts', appId, 'public', 'data', 'rifa_melissa', num.toString());
+                await deleteDoc(docRef);
+            }
+        };
+
+        // Iniciar autenticación
+        initApp();
+
+    </script>
+</body>
+</html>
