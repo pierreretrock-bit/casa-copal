@@ -116,7 +116,7 @@
                 </div>
             </div>
 
-            <!-- Conoce el Premio (NUEVO) -->
+            <!-- Conoce el Premio -->
             <div class="bg-white p-6 md:p-8 rounded-3xl shadow-sm border border-gray-100 mb-10 flex flex-col md:flex-row gap-6 items-center" data-aos="fade-up" data-aos-delay="50">
                 <div class="w-full md:w-1/3 aspect-[4/3] rounded-2xl overflow-hidden shadow-inner shrink-0 relative group">
                     <img src="https://i.postimg.cc/Xq68hKSx/foto_1.png" alt="Salón Casa Copal" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
@@ -146,8 +146,15 @@
                     <i class="fa-solid fa-ticket text-terracota"></i> Elige tu número de la suerte
                 </h2>
                 <div id="rifa-grid" class="grid grid-cols-5 md:grid-cols-10 gap-2 md:gap-4 relative z-10"></div>
-                <div class="mt-12 flex justify-center border-t border-gray-100 pt-6">
-                    <button onclick="window.openAdminAuth()" class="text-xs text-gray-400 hover:text-gray-600 flex items-center gap-1 transition-colors font-bold bg-gray-50 px-4 py-2 rounded-full border border-gray-200">
+                
+                <!-- Botones Inferiores -->
+                <div class="mt-10 flex flex-col sm:flex-row justify-center items-center gap-4 border-t border-gray-100 pt-8">
+                    <!-- NUEVO BOTÓN GENÉRICO DE WHATSAPP -->
+                    <a href="https://wa.me/526242641609?text=Hola,%20ya%20aparté%20un%20boleto%20para%20la%20rifa%20y%20quiero%20enviar%20mi%20comprobante." target="_blank" class="text-sm font-bold text-[#25D366] bg-green-50 px-5 py-3 rounded-full hover:bg-green-100 transition-colors flex items-center gap-2 shadow-sm w-full sm:w-auto justify-center">
+                        <i class="fa-brands fa-whatsapp text-lg"></i> ¿Ya apartaste? Enviar comprobante
+                    </a>
+                    
+                    <button onclick="window.openAdminAuth()" class="text-sm text-gray-500 hover:text-carbon flex items-center gap-2 transition-colors font-bold bg-gray-50 px-5 py-3 rounded-full border border-gray-200 shadow-sm w-full sm:w-auto justify-center">
                         <i class="fa-solid fa-shield-halved"></i> Acceso Admin
                     </button>
                 </div>
@@ -160,6 +167,7 @@
     </footer>
 
     <!-- MODALES OCULTOS -->
+    
     <!-- Modal 1: Compra -->
     <div id="rifa-purchase-modal" class="fixed inset-0 z-[100] hidden bg-black/60 backdrop-blur-sm flex items-center justify-center opacity-0 transition-opacity duration-300 px-4">
         <div class="bg-white rounded-3xl shadow-2xl max-w-md w-full overflow-hidden">
@@ -184,13 +192,13 @@
                 </div>
                 <div class="mt-8 flex gap-4">
                     <button type="button" onclick="window.closeRifaPurchase()" class="w-1/3 px-4 py-3.5 border border-gray-200 text-gray-600 font-bold rounded-xl hover:bg-gray-50 transition-colors">Cancelar</button>
-                    <button type="submit" id="btn-submit-purchase" class="w-2/3 px-4 py-3.5 bg-terracota text-white font-bold rounded-xl hover:bg-terracotaDark shadow-lg transition-all active:scale-95 flex items-center justify-center gap-2">Apartar Boleto <i class="fa-solid fa-arrow-right"></i></button>
+                    <button type="submit" id="btn-submit-purchase" class="w-2/3 px-4 py-3.5 bg-terracota text-white font-bold rounded-xl hover:bg-terracotaDark shadow-lg transition-all active:scale-95 flex items-center justify-center gap-2">Apartar <i class="fa-solid fa-arrow-right"></i></button>
                 </div>
             </form>
         </div>
     </div>
 
-    <!-- Modal 2: Boleto Virtual -->
+    <!-- Modal 2: Boleto Virtual (Éxito) -->
     <div id="rifa-ticket-modal" class="fixed inset-0 z-[100] hidden bg-carbon/90 backdrop-blur-md flex items-center justify-center opacity-0 transition-opacity duration-300 px-4">
         <div class="bg-white rounded-[2rem] w-full max-w-sm relative text-center p-8 shadow-2xl">
             <button onclick="window.closeRifaTicket()" class="absolute top-4 right-4 text-gray-400 hover:text-carbon bg-gray-100 w-8 h-8 rounded-full flex items-center justify-center"><i class="fa-solid fa-xmark text-lg"></i></button>
@@ -207,7 +215,6 @@
                 <div class="border-t border-gray-600 pt-4 mt-4 text-left bg-black/20 p-4 rounded-xl">
                     <p class="text-[10px] text-gray-400 uppercase tracking-widest font-bold">Titular:</p>
                     <p id="vt-name" class="font-bold text-terracota text-xl truncate mt-1">---</p>
-                    <p id="vt-phone" class="text-xs text-gray-300 mt-1"><i class="fa-solid fa-phone text-[10px] mr-1"></i> ---</p>
                 </div>
             </div>
             <a id="vt-wa-btn" href="#" target="_blank" class="mt-8 flex items-center justify-center gap-2 w-full bg-[#25D366] text-white font-bold py-4 rounded-xl hover:bg-[#128C7E] transition-colors shadow-lg hover:-translate-y-1"><i class="fa-brands fa-whatsapp text-2xl"></i> Enviar Comprobante</a>
@@ -215,6 +222,28 @@
         </div>
     </div>
 
+    <!-- NUEVO Modal 2.5: Boleto Pendiente (Para los números amarillos) -->
+    <div id="rifa-pending-modal" class="fixed inset-0 z-[100] hidden bg-black/60 backdrop-blur-sm flex items-center justify-center opacity-0 transition-opacity duration-300 px-4">
+        <div class="bg-white rounded-3xl shadow-2xl max-w-sm w-full overflow-hidden text-center p-8 relative">
+            <button onclick="window.closePendingPayment()" class="absolute top-4 right-4 text-gray-400 hover:text-carbon bg-gray-100 w-8 h-8 rounded-full flex items-center justify-center transition-colors"><i class="fa-solid fa-xmark text-lg"></i></button>
+            <div class="mx-auto w-16 h-16 bg-yellow-50 text-yellow-500 rounded-full flex items-center justify-center mb-4 border-4 border-white shadow-sm"><i class="fa-solid fa-clock text-3xl"></i></div>
+            
+            <h3 class="font-bold text-2xl font-serif text-carbon mb-2">Boleto Apartado</h3>
+            <p class="text-gray-500 text-sm mb-6">El boleto <strong id="pending-num" class="text-terracota font-black text-lg">#--</strong> está en espera de confirmación de pago.</p>
+            
+            <div class="bg-gray-50 p-4 rounded-xl mb-6 text-left border border-gray-100">
+                <p class="text-[10px] text-gray-400 uppercase font-bold tracking-wider mb-1">A nombre de:</p>
+                <p id="pending-name" class="font-bold text-carbon text-lg">---</p>
+            </div>
+            
+            <p class="text-xs text-gray-500 mb-4 leading-relaxed bg-yellow-50 p-3 rounded-lg border border-yellow-100">¿Eres el titular de este número y olvidaste enviar tu comprobante? ¡Hazlo ahora para asegurar tu lugar!</p>
+            
+            <a id="pending-wa-btn" href="#" target="_blank" class="flex items-center justify-center gap-2 w-full bg-[#25D366] text-white font-bold py-3.5 rounded-xl hover:bg-[#128C7E] transition-colors shadow-md hover:-translate-y-1"><i class="fa-brands fa-whatsapp text-xl"></i> Enviar Comprobante</a>
+            <button onclick="window.closePendingPayment()" class="mt-4 text-gray-400 text-sm font-bold hover:text-carbon transition-colors">Volver a la cuadrícula</button>
+        </div>
+    </div>
+
+    <!-- Modal 3: Autenticación Admin Real -->
     <div id="rifa-admin-auth-modal" class="fixed inset-0 z-[100] hidden bg-carbon/90 backdrop-blur-sm flex items-center justify-center opacity-0 transition-opacity duration-300 px-4">
         <div class="bg-white rounded-3xl shadow-2xl max-w-sm w-full overflow-hidden text-center">
             <div class="bg-carbon p-6 text-white relative">
@@ -233,6 +262,7 @@
         </div>
     </div>
 
+    <!-- Modal 4: Panel Admin -->
     <div id="rifa-admin-panel-modal" class="fixed inset-0 z-[100] hidden bg-gray-100 overflow-y-auto opacity-0 transition-opacity duration-300">
         <div class="max-w-6xl mx-auto p-4 md:p-8">
             <div class="flex flex-col sm:flex-row justify-between items-center gap-4 mb-8 bg-white p-6 rounded-2xl shadow-sm border border-gray-200">
@@ -374,7 +404,9 @@
                 if (t.status === 'pagado') {
                     btn.className += 'bg-gray-100 text-gray-300 cursor-not-allowed border-gray-100';
                 } else if (t.status === 'apartado') {
-                    btn.className += 'bg-yellow-50 text-yellow-500 cursor-not-allowed border-yellow-200';
+                    // CAMBIO AQUI: LOS AMARILLOS AHORA SON CLICKEABLES
+                    btn.className += 'bg-yellow-50 text-yellow-500 cursor-pointer border-yellow-200 hover:bg-yellow-100 hover:-translate-y-1 hover:shadow-md hover:shadow-yellow-500/20';
+                    btn.onclick = () => window.openPendingPayment(t.number, t.buyerName);
                 } else {
                     btn.className += 'bg-white text-carbon border-gray-200 hover:bg-terracota hover:border-terracota hover:text-white cursor-pointer hover:-translate-y-1 hover:shadow-md';
                     btn.onclick = () => window.openRifaPurchase(t.number);
@@ -390,6 +422,8 @@
             document.getElementById('admin-stat-disponibles').innerText = 100 - ocupados;
         };
 
+        // === FUNCIONES DE MODALES PÚBLICOS ===
+        
         window.openRifaPurchase = (num) => {
             selectedRifaNumber = num;
             document.getElementById('rifa-selected-num').innerText = num;
@@ -425,11 +459,16 @@
                     number: selectedRifaNumber, status: 'apartado', buyerName: name, buyerPhone: phone, timestamp: new Date().toISOString()
                 });
                 closeRifaPurchase();
+                
+                // Formatear número para que agarre Lada 52 (México)
+                let phoneNum = '526242641609'; // Tu número oficial para depósitos
+                
                 document.getElementById('vt-number').innerText = `#${selectedRifaNumber}`;
                 document.getElementById('vt-name').innerText = name;
-                document.getElementById('vt-phone').innerHTML = `<i class="fa-solid fa-phone text-[10px] mr-1"></i> ${phone}`;
+                
                 const msg = `Hola, acabo de apartar el boleto #${selectedRifaNumber} a nombre de ${name}. Aquí te envío mi comprobante de pago de la rifa de Melissa.`;
-                document.getElementById('vt-wa-btn').href = `https://wa.me/526243203289?text=${encodeURIComponent(msg)}`;
+                document.getElementById('vt-wa-btn').href = `https://wa.me/${phoneNum}?text=${encodeURIComponent(msg)}`;
+                
                 const vtModal = document.getElementById('rifa-ticket-modal');
                 vtModal.classList.remove('hidden');
                 setTimeout(() => vtModal.classList.remove('opacity-0'), 10);
@@ -438,7 +477,7 @@
                 alert("Error guardando el boleto. Revisa la conexión.");
             } finally { 
                 btn.disabled = false; 
-                btn.innerHTML = 'Apartar Boleto <i class="fa-solid fa-arrow-right"></i>'; 
+                btn.innerHTML = 'Apartar <i class="fa-solid fa-arrow-right"></i>'; 
             }
         };
 
@@ -448,6 +487,30 @@
             setTimeout(() => { modal.classList.add('hidden'); document.body.style.overflow = 'auto'; }, 300);
         };
 
+        // NUEVAS FUNCIONES: Modal de Pendiente de Pago
+        window.openPendingPayment = (num, name) => {
+            document.getElementById('pending-num').innerText = `#${num}`;
+            document.getElementById('pending-name').innerText = name || 'Usuario';
+            
+            let phoneNum = '526242641609'; // Tu número oficial
+            const msg = `Hola, aparté el boleto #${num} a nombre de ${name}. Aquí te envío mi comprobante de pago de la rifa de Melissa.`;
+            document.getElementById('pending-wa-btn').href = `https://wa.me/${phoneNum}?text=${encodeURIComponent(msg)}`;
+            
+            const modal = document.getElementById('rifa-pending-modal');
+            modal.classList.remove('hidden');
+            setTimeout(() => modal.classList.remove('opacity-0'), 10);
+            document.body.style.overflow = 'hidden';
+        };
+
+        window.closePendingPayment = () => {
+            const modal = document.getElementById('rifa-pending-modal');
+            modal.classList.add('opacity-0');
+            setTimeout(() => { modal.classList.add('hidden'); document.body.style.overflow = 'auto'; }, 300);
+        };
+
+
+        // === FUNCIONES ADMIN ===
+        
         window.openAdminAuth = () => {
             if (currentUser && !currentUser.isAnonymous) {
                 window.renderAdminPanel();
