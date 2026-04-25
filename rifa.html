@@ -140,6 +140,7 @@
     </footer>
 
     <!-- MODALES OCULTOS -->
+    <!-- Modal 1: Compra -->
     <div id="rifa-purchase-modal" class="fixed inset-0 z-[100] hidden bg-black/60 backdrop-blur-sm flex items-center justify-center opacity-0 transition-opacity duration-300 px-4">
         <div class="bg-white rounded-3xl shadow-2xl max-w-md w-full overflow-hidden">
             <div class="bg-carbon p-5 flex justify-between items-center text-white">
@@ -169,6 +170,7 @@
         </div>
     </div>
 
+    <!-- Modal 2: Boleto Virtual -->
     <div id="rifa-ticket-modal" class="fixed inset-0 z-[100] hidden bg-carbon/90 backdrop-blur-md flex items-center justify-center opacity-0 transition-opacity duration-300 px-4">
         <div class="bg-white rounded-[2rem] w-full max-w-sm relative text-center p-8 shadow-2xl">
             <button onclick="window.closeRifaTicket()" class="absolute top-4 right-4 text-gray-400 hover:text-carbon bg-gray-100 w-8 h-8 rounded-full flex items-center justify-center"><i class="fa-solid fa-xmark text-lg"></i></button>
@@ -198,12 +200,15 @@
             <div class="bg-carbon p-6 text-white relative">
                 <button onclick="window.closeAdminAuth()" class="absolute top-4 right-4 hover:text-terracota"><i class="fa-solid fa-xmark text-xl"></i></button>
                 <div class="mx-auto w-12 h-12 bg-white/10 rounded-full flex items-center justify-center mb-3"><i class="fa-solid fa-lock text-terracota text-2xl"></i></div>
-                <h3 class="font-bold text-2xl font-serif">Área Restringida</h3>
+                <h3 class="font-bold text-2xl font-serif">Acceso Administrador</h3>
             </div>
             <form onsubmit="window.submitAdminAuth(event)" class="p-8">
-                <input type="password" id="rifa-admin-pass" required class="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-4 focus:ring-2 focus:ring-terracota outline-none text-center tracking-[0.5em] text-xl font-black">
-                <p id="rifa-admin-error" class="text-rose-500 text-sm mt-2 hidden">Contraseña incorrecta.</p>
-                <button type="submit" class="w-full py-4 bg-terracota text-white font-bold rounded-xl mt-6 shadow-lg">Ingresar</button>
+                <div class="space-y-4">
+                    <input type="email" id="rifa-admin-email" required class="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-4 focus:ring-2 focus:ring-terracota outline-none text-center text-carbon" placeholder="Correo electrónico">
+                    <input type="password" id="rifa-admin-pass" required class="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-4 focus:ring-2 focus:ring-terracota outline-none text-center tracking-[0.3em] font-black text-carbon" placeholder="Contraseña">
+                </div>
+                <p id="rifa-admin-error" class="text-rose-500 text-sm mt-3 hidden font-bold">Credenciales incorrectas.</p>
+                <button type="submit" id="btn-admin-login" class="w-full py-4 bg-terracota text-white font-bold rounded-xl mt-6 shadow-lg">Ingresar</button>
             </form>
         </div>
     </div>
@@ -244,7 +249,7 @@
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
         import { getFirestore, collection, onSnapshot, doc, setDoc, deleteDoc, updateDoc } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
-        import { getAuth, signInAnonymously, signInWithCustomToken, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+        import { getAuth, signInAnonymously, signInWithCustomToken, signInWithEmailAndPassword, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
 
         AOS.init({ once: true, offset: 50 });
 
@@ -264,7 +269,6 @@
         const auth = getAuth(app);
         const appId = typeof __app_id !== 'undefined' ? __app_id : 'casa-copal-v1';
         
-        // RUTA ESTRICTA (Regla 1 del entorno vs Vercel)
         const isVercel = window.location.hostname.includes('vercel.app') || window.location.hostname.includes('casacopal');
         const canvasPath = collection(db, 'artifacts', appId, 'public', 'data', 'rifa_melissa');
         const prodPath = collection(db, 'rifa_melissa');
@@ -281,7 +285,6 @@
         let selectedRifaNumber = null;
         let currentUser = null;
 
-        // --- REGLA 3: AUTH ANTES DE QUERIES ---
         const initAuth = async () => {
             try {
                 if (typeof __initial_auth_token !== 'undefined' && __initial_auth_token) {
@@ -291,7 +294,6 @@
                 }
             } catch (error) {
                 console.error("Auth error:", error);
-                // Si falla porque no está habilitado en Firebase, en Vercel lo forzamos a cargar
                 if (isVercel) {
                     currentUser = { uid: 'public-vercel-user' };
                     startRealtimeSync();
@@ -310,7 +312,6 @@
             if (!currentUser) return;
 
             onSnapshot(rifaCollectionPath, (snapshot) => {
-                // Resetear boletos
                 const newTickets = Array.from({length: 100}, (_, i) => ({
                     number: i + 1, status: 'disponible', buyerName: '', buyerPhone: ''
                 }));
@@ -334,10 +335,6 @@
                 }
             }, (error) => {
                 console.error("Snapshot error:", error);
-                const loader = document.getElementById('grid-loading');
-                if (loader) {
-                    loader.innerHTML = '<i class="fa-solid fa-triangle-exclamation text-4xl text-rose-500 mb-3"></i><p class="font-bold text-carbon text-center">Falta un permiso en Firebase.</p><p class="text-xs text-gray-500 text-center mt-2 px-4">Ve a Firestore > Reglas y cambia "allow read, write: if false;" por "if true;"</p>';
-                }
             });
         };
 
@@ -418,7 +415,7 @@
                 setTimeout(() => vtModal.classList.remove('opacity-0'), 10);
             } catch (err) { 
                 console.error(err); 
-                alert("Error guardando el boleto. Revisa los permisos de Firebase.");
+                alert("Error guardando el boleto. Revisa la conexión.");
             } finally { 
                 btn.disabled = false; 
                 btn.innerHTML = 'Apartar Boleto <i class="fa-solid fa-arrow-right"></i>'; 
@@ -432,6 +429,15 @@
         };
 
         window.openAdminAuth = () => {
+            if (currentUser && !currentUser.isAnonymous) {
+                window.renderAdminPanel();
+                const modal = document.getElementById('rifa-admin-panel-modal');
+                modal.classList.remove('hidden');
+                setTimeout(() => modal.classList.remove('opacity-0'), 10);
+                document.body.style.overflow = 'hidden'; 
+                return;
+            }
+            document.getElementById('rifa-admin-email').value = '';
             document.getElementById('rifa-admin-pass').value = '';
             document.getElementById('rifa-admin-error').classList.add('hidden');
             const modal = document.getElementById('rifa-admin-auth-modal');
@@ -446,17 +452,31 @@
             setTimeout(() => { modal.classList.add('hidden'); document.body.style.overflow = 'auto'; }, 300);
         };
 
-        window.submitAdminAuth = (e) => {
+        window.submitAdminAuth = async (e) => {
             e.preventDefault();
-            if(document.getElementById('rifa-admin-pass').value === 'admin123') {
+            const email = document.getElementById('rifa-admin-email').value.trim();
+            const pass = document.getElementById('rifa-admin-pass').value;
+            const btn = document.getElementById('btn-admin-login');
+            
+            btn.disabled = true;
+            btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Validando...';
+
+            try {
+                await signInWithEmailAndPassword(auth, email, pass);
                 closeAdminAuth();
                 window.renderAdminPanel();
                 const modal = document.getElementById('rifa-admin-panel-modal');
                 modal.classList.remove('hidden');
                 setTimeout(() => modal.classList.remove('opacity-0'), 10);
                 document.body.style.overflow = 'hidden'; 
-            } else {
-                document.getElementById('rifa-admin-error').classList.remove('hidden');
+            } catch (error) {
+                console.error("Error de login:", error);
+                const errorMsg = document.getElementById('rifa-admin-error');
+                errorMsg.classList.remove('hidden');
+                errorMsg.innerText = 'Correo o contraseña incorrectos.';
+            } finally {
+                btn.disabled = false;
+                btn.innerHTML = 'Ingresar';
             }
         };
 
@@ -473,7 +493,9 @@
             let confirmados = rifaTickets.filter(t => t.status === 'pagado').length * 200;
             document.getElementById('admin-stat-recaudado').innerText = `$${confirmados.toLocaleString()}`;
             document.getElementById('admin-stat-porcobrar').innerText = rifaTickets.filter(t => t.status === 'apartado').length;
+            
             if(ocupados.length === 0) { tbody.innerHTML = '<tr><td colspan="5" class="p-10 text-center text-gray-400 font-medium">Nadie ha apartado boletos aún.</td></tr>'; return; }
+            
             ocupados.forEach(t => {
                 const tr = document.createElement('tr');
                 tr.className = "border-b border-gray-100 hover:bg-gray-50 transition-colors";
