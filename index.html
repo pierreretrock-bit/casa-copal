@@ -466,7 +466,7 @@
                 </div>
                 
                 <p class="text-xs text-gray-500 mb-6 text-center bg-gray-50 p-3 rounded-lg border border-gray-100">
-                    <i class="fa-solid fa-lock text-terracota mr-1"></i> Al confirmar, la fecha quedará apartada en el sistema y te enviaremos por WhatsApp los datos para realizar tu depósito o transferencia.
+                    <i class="fa-solid fa-lock text-terracota mr-1"></i> Al confirmar, recibiremos tu solicitud de fecha y te enviaremos por WhatsApp los datos para realizar tu depósito o transferencia. La fecha se confirma al recibir el anticipo.
                 </p>
 
                 <!-- Botón de Envío -->
@@ -570,7 +570,7 @@
     <script type="module">
         // Importar Módulos de Base de Datos (Firebase)
         import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
-        import { getFirestore, collection, onSnapshot, doc, setDoc } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+        import { getFirestore, collection, onSnapshot, addDoc } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
 
         // Inicializar Animaciones
         AOS.init({ once: true, offset: 100 });
@@ -836,21 +836,22 @@
             const total = basePrice + (deptoSelected ? deptoPrice : 0);
             
             if(isDbConnected && db) {
-                try {
-                    const docRef = doc(db, 'reservaciones', dateStr);
-                    await setDoc(docRef, {
-                        status: 'apartado_esperando_pago',
-                        precio_total: total,
-                        depto_incluido: deptoSelected,
-                        cliente_nombre: nombre,     
-                        cliente_telefono: telefono, 
-                        cliente_correo: correo,     
-                        timestamp: new Date().toISOString()
-                    });
-                } catch(e) { 
-                    console.error("Error guardando reserva:", e); 
-                }
-            }
+    try {
+        await addDoc(collection(db, 'solicitudes_reserva'), {
+            fecha: dateStr,
+            status: 'pendiente',
+            precio_total: total,
+            depto_incluido: deptoSelected,
+            cliente_nombre: nombre,
+            cliente_telefono: telefono,
+            cliente_correo: correo,
+            origen: 'web_publica',
+            createdAt: new Date().toISOString()
+        });
+    } catch(e) { 
+        console.error("Error guardando solicitud de reserva:", e); 
+    }
+}
 
             if(!reservedDates.includes(dateStr)) {
                 reservedDates.push(dateStr);
@@ -864,8 +865,8 @@
             const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
             const fechaTxt = selectedDateObj.toLocaleDateString('es-MX', options);
 
-            let mensaje = `¡Hola! 🌿 Soy ${nombre}, acabo de apartar mi fecha en la página web oficial.\n\n`;
-            mensaje += `🗓️ *Fecha Reservada:* ${fechaTxt}\n`;
+            let mensaje = `¡Hola! 🌿 Soy ${nombre}, acabo de enviar una solicitud de fecha en la página web oficial.\n\n`;
+            mensaje += `🗓️ *Fecha Solicitada:* ${fechaTxt}\n`;
             mensaje += `🏠 *Salón:* $${basePrice.toLocaleString()}\n`;
             if(deptoSelected) {
                 mensaje += `🛏️ *Departamento:* $${deptoPrice.toLocaleString()}\n`;
