@@ -685,16 +685,16 @@
         let deptoPrice = 0;
         let reservedDates = [];
 
-        if(isDbConnected && db) {
-            const reservacionesRef = collection(db, 'reservaciones');
-            onSnapshot(reservacionesRef, (snapshot) => {
-                reservedDates = [];
-                snapshot.forEach((doc) => {
-                    reservedDates.push(doc.id); 
-                });
-                window.renderCalendar();
-            });
-        }
+       if(isDbConnected && db) {
+    const fechasOcupadasRef = collection(db, 'fechas_ocupadas');
+    onSnapshot(fechasOcupadasRef, (snapshot) => {
+        reservedDates = [];
+        snapshot.forEach((doc) => {
+            reservedDates.push(doc.id);
+        });
+        window.renderCalendar();
+    });
+}
 
         function formatDateToYYYYMMDD(dateObj) {
             const y = dateObj.getFullYear();
